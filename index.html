@@ -4,12 +4,35 @@
 <meta charset="UTF-8">
 <title>Monika ❤️</title>
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 <style>
 body{
 margin:0;
-font-family:"Comic Sans MS",cursive;
-background:linear-gradient(45deg,#ffd6e8,#fff0f6,#e6f7ff);
 overflow:hidden;
+font-family:'Comic Sans MS',cursive;
+background:linear-gradient(120deg,#ffe6f2,#fff0f5,#e6f7ff);
+}
+
+.heart-bg{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+overflow:hidden;
+}
+
+.heart{
+position:absolute;
+color:#ff66aa;
+font-size:20px;
+animation:floatUp 8s linear infinite;
+opacity:.5;
+}
+
+@keyframes floatUp{
+from{transform:translateY(100vh) scale(0.5);}
+to{transform:translateY(-10vh) scale(1.2);}
 }
 
 .page{
@@ -22,59 +45,70 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:30px;
-animation:fade 1s;
+animation:flip 1s;
 }
 
-@keyframes fade{
-from{opacity:0;transform:scale(.9)}
-to{opacity:1;transform:scale(1)}
+@keyframes flip{
+from{transform:rotateY(90deg);opacity:0}
+to{transform:rotateY(0);opacity:1}
 }
 
 h1{
-color:#ff2f92;
 font-size:38px;
-animation:dance 1.5s infinite alternate;
+color:#ff3399;
+text-shadow:0 0 20px #ff99cc;
+animation:glow 1.2s infinite alternate;
 }
 
-@keyframes dance{
-from{transform:translateY(-6px)}
-to{transform:translateY(6px)}
+@keyframes glow{
+from{text-shadow:0 0 10px #ff99cc;}
+to{text-shadow:0 0 30px #ff3399;}
 }
 
 button{
-padding:15px 25px;
+padding:14px 28px;
 font-size:22px;
 border:none;
 border-radius:40px;
 margin:10px;
 cursor:pointer;
+transition:0.3s;
 }
 
 .yes{background:#ff4da6;color:white;}
-.no{background:#999;color:white;}
+.no{background:#777;color:white;}
+
+button:hover{transform:scale(1.1)}
 
 .float{
 position:fixed;
 bottom:-50px;
-font-size:30px;
+font-size:32px;
 animation:up 4s linear forwards;
 }
 @keyframes up{
 to{transform:translateY(-120vh);opacity:0;}
 }
 
-.spark{
+.flower{
 position:fixed;
-font-size:24px;
-animation:burst 1.5s ease-out forwards;
+top:-40px;
+font-size:28px;
+animation:fall 4s linear forwards;
 }
-@keyframes burst{
-to{transform:scale(3);opacity:0;}
+@keyframes fall{
+to{transform:translateY(120vh) rotate(360deg);opacity:0;}
 }
 </style>
 </head>
 
 <body>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3a9b7e.mp3">
+</audio>
+
+<div class="heart-bg" id="bg"></div>
 
 <div class="page" id="p1" style="display:flex">
 <h1>Welcome Monika Ji ❤️</h1>
@@ -115,23 +149,33 @@ to{transform:scale(3);opacity:0;}
 </div>
 
 <script>
+
+document.getElementById("music").play().catch(()=>{});
+
+function hearts(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(6+Math.random()*4)+"s";
+document.getElementById("bg").appendChild(h);
+setTimeout(()=>h.remove(),10000);
+}
+setInterval(hearts,400);
+
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.style.display="none");
 document.getElementById(id).style.display="flex";
 }
 
-function go2(){
-show("p2");
-setTimeout(()=>{},3000);
-}
-
+function go2(){show("p2")}
 function go3(){show("p3")}
 function go4(){show("p4")}
 function go5(){show("p5")}
 function go6(){show("p6")}
 
-function celebrate(){
-for(let i=0;i<25;i++){
+function balloons(){
+for(let i=0;i<30;i++){
 let b=document.createElement("div");
 b.className="float";
 b.innerHTML=Math.random()>0.5?"🎈":"💖";
@@ -139,18 +183,37 @@ b.style.left=Math.random()*100+"vw";
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),4000);
 }
-
-for(let i=0;i<40;i++){
-let s=document.createElement("div");
-s.className="spark";
-s.innerHTML=["✨","🌸","💥"][Math.floor(Math.random()*3)];
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),1500);
 }
 
-setTimeout(()=>show("final"),4000);
+function flowers(){
+for(let i=0;i<25;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
+f.style.left=Math.random()*100+"vw";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),4000);
+}
+}
+
+function fireworks(){
+confetti({
+particleCount:250,
+spread:150,
+origin:{y:0.6}
+});
+}
+
+function celebrate(){
+balloons();
+flowers();
+fireworks();
+let interval=setInterval(fireworks,600);
+
+setTimeout(()=>{
+clearInterval(interval);
+show("final");
+},4000);
 }
 </script>
 

@@ -1,155 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>For Monika ❤️</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(-45deg,#ff6ec4,#7873f5,#4facfe,#43e97b);
-background-size:400% 400%;
-animation:gradient 10s ease infinite;
-overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background: linear-gradient(120deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
+  background-size:400% 400%;
+  animation:bgMove 15s ease infinite;
 }
 
-@keyframes gradient{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-.box{
-backdrop-filter:blur(20px);
-background:rgba(255,255,255,0.15);
-border:1px solid rgba(255,255,255,0.3);
-padding:40px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 20px 40px rgba(0,0,0,0.3);
-max-width:520px;
-color:white;
-z-index:2;
+.container{
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border-radius:30px;
+  padding:40px;
+  text-align:center;
+  max-width:550px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
 }
 
-h1{
-font-size:26px;
-min-height:120px;
-text-shadow:0 0 10px rgba(255,255,255,0.8);
+.subtext{
+  font-size:20px;
+  color:#ffe6f2;
+  margin-bottom:15px;
+  text-shadow: 0 0 10px #ff6ec4;
+}
+
+.maintext{
+  font-size:28px;
+  font-weight:700;
+  color:#ffffff;
+  margin-bottom:30px;
+  text-shadow: 0 0 20px #ff6ec4, 0 0 30px #ff6ec4, 0 0 40px #ff6ec4;
 }
 
 button{
-padding:14px 30px;
-font-size:20px;
-border:none;
-border-radius:14px;
-cursor:pointer;
-margin:10px;
-transition:0.3s;
+  padding:15px 35px;
+  font-size:20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  margin:10px;
+  font-weight:bold;
+  transition:0.3s;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
 #yesBtn{
-background:#00ff88;
-color:black;
-font-size:26px;
-font-weight:bold;
+  background: #ff4d6d;
+  color:white;
+  font-size:22px;
 }
 
 #yesBtn:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px #00ff88;
+  transform: scale(1.1);
+  box-shadow:0 0 20px #ff4d6d, 0 0 40px #ff6ec4;
 }
 
 #noBtn{
-background:#999;
-color:white;
+  background: gray;
+  color:white;
 }
 
-#msg{
-font-size:24px;
-margin-top:15px;
-font-weight:bold;
-color:#00ff88;
-text-shadow:0 0 10px #00ff88;
+#message{
+  margin-top:25px;
+  font-size:24px;
+  color:#00ff88;
+  font-weight:bold;
+  text-shadow:0 0 15px #00ff88;
 }
 
-/* floating hearts */
+/* Floating hearts */
 .heart{
-position:absolute;
-font-size:22px;
-animation:float 6s linear infinite;
+  position:absolute;
+  font-size:24px;
+  animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh);opacity:1}
-100%{transform:translateY(-10vh);opacity:0}
+  0%{transform:translateY(100vh); opacity:1;}
+  100%{transform:translateY(-10vh); opacity:0;}
 }
 
-/* fireworks */
+/* Fireworks particles */
 .firework{
-position:absolute;
-width:8px;
-height:8px;
-background:white;
-border-radius:50%;
-animation:boom 1s ease-out forwards;
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:gold;
+  border-radius:50%;
+  animation:boom 1s ease-out forwards;
 }
 
 @keyframes boom{
-0%{transform:scale(1);opacity:1}
-100%{transform:scale(22);opacity:0}
+  0%{transform:scale(1); opacity:1;}
+  100%{transform:scale(20); opacity:0;}
+}
+
+/* Clapping emoji animation */
+.clap{
+  position:absolute;
+  font-size:30px;
+  animation:clapMove 3s linear forwards;
+}
+
+@keyframes clapMove{
+  0%{transform:translateY(0) rotate(0deg); opacity:1;}
+  100%{transform:translateY(-400px) rotate(360deg); opacity:0;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="box">
-<h1 id="text"></h1>
-<button id="yesBtn" onclick="yes()">YES</button>
-<button id="noBtn">NO</button>
-<div id="msg"></div>
+<div class="container">
+  <div class="subtext">Monika, this is the last time I am asking you</div>
+  <div class="maintext">Will you be my Life Partner? 💖</div>
+  <button id="yesBtn" onclick="happyMoments()">YES</button>
+  <button id="noBtn">NO</button>
+  <div id="message"></div>
 </div>
 
 <script>
-let msg="Monika ❤️\nThis is the last time I am asking you…\n\nWill you be my life partner?";
-let i=0;
-
-function type(){
-if(i<msg.length){
-document.getElementById("text").innerHTML+=msg[i]==="\n"?"<br>":msg[i];
-i++;
-setTimeout(type,55);
-}}
-type();
-
+/* Floating hearts continuously */
 setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},500);
+  let h = document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
 
-function yes(){
-document.getElementById("yesBtn").style.background="#00ff00";
-document.getElementById("msg").innerText="🎉 Congratulations 🎉";
+/* YES button function */
+function happyMoments(){
+  document.getElementById("yesBtn").style.background="#00ff88";
+  document.getElementById("message").innerText="🎉 Congratulations! 🎉";
 
-for(let i=0;i<35;i++){
-let f=document.createElement("div");
-f.className="firework";
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*100+"vh";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1000);
-}}
+  // Fireworks
+  for(let i=0;i<35;i++){
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+
+  // Clapping emojis
+  for(let i=0;i<20;i++){
+    let c=document.createElement("div");
+    c.className="clap";
+    c.innerHTML="👏";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="90vh";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3000);
+  }
+}
+
+/* NO button does nothing */
+document.getElementById("noBtn").onclick=function(){};
 </script>
 
 </body>

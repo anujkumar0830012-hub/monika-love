@@ -1,167 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Monika ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  background: #ffe6f0; /* soft pink pastel base */
-}
-.container{
-  width:90%;
-  max-width:600px;
-  text-align:center;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(15px);
-  border-radius:25px;
-  padding:40px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
-  color:#333;
-  position:relative;
-}
-button{
-  padding:15px 35px;
-  font-size:20px;
-  margin:10px;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.3s;
-}
-#yesBtn{background:#ff9aae;color:white;}
-#yesBtn:hover{transform:scale(1.1);box-shadow:0 0 15px #ff9aae;}
-#noBtn{background:gray;color:white;}
-#message{margin-top:20px;font-size:24px;font-weight:bold;color:#ff4d6d;text-shadow:0 0 10px #ffb3c6;}
-/* Soft animated background painting effect */
-body.stage1{background:linear-gradient(45deg,#ffe6f0,#fff0f5,#ffe0f0,#fff5f5);background-size:400% 400%;animation:bg1 15s ease infinite;}
-body.stage2{background:linear-gradient(120deg,#fff0f5,#ffe6f0,#ffd6e0,#fff5f5);background-size:400% 400%;animation:bg2 15s ease infinite;}
-body.stage3{background:#ffd6e0;}
-body.stage4{background:linear-gradient(120deg,#ffe0f0,#ffccd5,#ffd6e0,#fff0f5);background-size:400% 400%;animation:bg3 15s ease infinite;}
-@keyframes bg1{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes bg2{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes bg3{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Monika</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
 
-/* Floating hearts */
-.heart{position:absolute;font-size:24px;animation:float 6s linear infinite;}
-@keyframes float{0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-/* Fireworks */
-.firework{position:absolute;width:8px;height:8px;background:gold;border-radius:50%;animation:boom 1s ease-out forwards;}
-@keyframes boom{0%{transform:scale(1);opacity:1;}100%{transform:scale(20);opacity:0;}}
+        section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.8s ease-in-out;
+            border-bottom: 2px solid #f8bbd0;
+        }
 
-/* Claps */
-.clap{position:absolute;font-size:30px;animation:clapMove 3s linear forwards;}
-@keyframes clapMove{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(-400px) rotate(360deg);opacity:0;}}
-</style>
+        h1 { font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 2.5rem; }
+        p { color: #880e4f; font-size: 1.2rem; }
+
+        .btn-click {
+            background-color: #d81b60;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .btn-click:hover { transform: scale(1.1); background-color: #ad1457; }
+
+        /* Hidden initially */
+        .hidden { display: none; }
+
+        /* Proposal Buttons */
+        .options { margin-top: 30px; display: flex; gap: 20px; }
+        #yesBtn { background-color: #4caf50; }
+        #noBtn { background-color: #f44336; cursor: not-allowed; }
+
+        /* Celebration State */
+        .celebration-active {
+            background: radial-gradient(circle, #ffeb3b, #e91e63);
+            animation: bgChange 2s infinite alternate;
+        }
+
+        @keyframes bgChange {
+            from { background-color: #fce4ec; }
+            to { background-color: #ff80ab; }
+        }
+
+        .gif-container img {
+            width: 200px;
+            border-radius: 15px;
+            margin: 10px;
+        }
+
+        .congrats-text {
+            font-size: 3rem;
+            color: gold;
+            text-shadow: 2px 2px #000;
+            display: none;
+        }
+    </style>
 </head>
-<body class="stage1">
-<div class="container" id="content">
-  <div id="text1" style="font-size:24px;font-weight:bold;cursor:pointer;">Click to know</div>
-</div>
+<body>
 
-<script>
-// Stage tracking
-let stage = 1;
+    <section id="page1">
+        <h1>Monika, please last time think about it.</h1>
+        <p>Phir nahi kahunga kabhi...</p>
+        <button class="btn-click" onclick="nextPage('page2')">Click to know</button>
+    </section>
 
-// Stage 1 text click
-document.getElementById("text1").onclick = function(){
-  stage = 2;
-  document.body.className="stage2";
-  document.getElementById("content").innerHTML = `
-    <div style="font-size:20px;margin-bottom:15px;">Monika pls last time think about it.<br>Phir nhi kahunga kabhi</div>
-    <div style="cursor:pointer;font-size:22px;font-weight:bold;margin-top:20px;" id="next1">Click to know</div>`;
-  document.getElementById("next1").onclick = stage2;
-}
+    <section id="page2" class="hidden">
+        <h1>"Every moment spent with you is like a beautiful dream come true."</h1>
+        <p>Scroll down a bit...</p>
+        <div style="height: 100px;"></div>
+        <button class="btn-click" onclick="nextPage('page3')">Click to know</button>
+    </section>
 
-// Stage 2 → Will you be my life partner
-function stage2(){
-  stage = 3;
-  document.body.className="stage3";
-  document.getElementById("content").innerHTML = `
-    <div style="font-size:24px;font-weight:bold;margin-bottom:30px;">Will you be my Life Partner! 💖</div>
-    <button id="yesBtn">YES</button>
-    <button id="noBtn">NO</button>
-    <div id="message"></div>`;
-  document.getElementById("yesBtn").onclick = stage3;
-  document.getElementById("noBtn").onclick = function(){};
-}
+    <section id="page3" class="hidden">
+        <h1 id="proposalText">Will you be my life partner?</h1>
+        <div class="options">
+            <button class="btn-click" id="yesBtn" onclick="celebrate()">YES</button>
+            <button class="btn-click" id="noBtn" onmouseover="moveNo()" onclick="noAction()">NO</button>
+        </div>
 
-// Stage 3 → YES happy moments
-function stage3(){
-  document.getElementById("yesBtn").style.background="#ff77aa";
-  document.getElementById("message").innerText="🎉 Congratulations! 🎉";
-  document.body.className="stage4";
+        <div id="successArea" class="hidden">
+            <h1 class="congrats-text" id="congrats">CONGRATULATIONS! ❤️</h1>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/26vUxArWfLCHW/giphy.gif" alt="Dance">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzhueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lH4ADRtAYnGsLe/giphy.gif" alt="Celebrate">
+            </div>
+            <p><strong>Click below for the final message...</strong></p>
+            <button class="btn-click" onclick="nextPage('page4')">Click to know</button>
+        </div>
+    </section>
 
-  // Fireworks
-  for(let i=0;i<40;i++){
-    let f=document.createElement("div");
-    f.className="firework";
-    f.style.left=Math.random()*100+"vw";
-    f.style.top=Math.random()*100+"vh";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),4000);
-  }
+    <section id="page4" class="hidden">
+        <h1>Anuj is still waiting for you.</h1>
+        <h2 style="color: #d81b60;">So ab call kar lo Madam jee! 📞</h2>
+        <p>❤️ 💍 ❤️</p>
+    </section>
 
-  // Claps
-  for(let i=0;i<25;i++){
-    let c=document.createElement("div");
-    c.className="clap";
-    c.innerHTML="👏";
-    c.style.left=Math.random()*100+"vw";
-    c.style.top="90vh";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),4000);
-  }
+    <script>
+        function nextPage(pageId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            // Show target section
+            const target = document.getElementById(pageId);
+            target.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
 
-  // Floating hearts
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
-  },400);
+        function noAction() {
+            alert("This button is out of service. Please try the green one! 😉");
+        }
 
-  // Scroll down clickable for next stage
-  setTimeout(()=>{
-    let more = document.createElement("div");
-    more.style.cursor="pointer";
-    more.style.fontSize="22px";
-    more.style.fontWeight="bold";
-    more.style.marginTop="30px";
-    more.innerText="Click to know";
-    more.onclick=stage4;
-    document.getElementById("content").appendChild(more);
-  },1000);
-}
+        // Make No button unclickable/elusive (Optional spice)
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            btn.style.opacity = "0.5";
+        }
 
-// Stage 4 → final reward
-function stage4(){
-  document.getElementById("content").innerHTML = `
-    <div style="font-size:22px;font-weight:bold;">Anuj is still waiting for you.<br>So ab call kr lo madam jee ❤️</div>
-    <div style="font-size:28px;font-weight:bold;color:#ff77aa;margin-top:30px;">🎉 CONGRATULATIONS! 🎉</div>`;
-  
-  // Page full of love hearts background
-  document.body.className="stage4";
-  for(let i=0;i<50;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top=Math.random()*100+"vh";
-    h.style.fontSize=20+Math.random()*20+"px";
-    document.body.appendChild(h);
-  }
-}
-</script>
+        function celebrate() {
+            const page = document.getElementById('page3');
+            page.classList.add('celebration-active');
+            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('proposalText').innerText = "You made me the happiest person! 😍";
+            document.getElementById('successArea').classList.remove('hidden');
+            document.getElementById('congrats').style.display = 'block';
+
+            // Professional Fireworks Effect
+            var duration = 4 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 7,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
+                });
+                confetti({
+                    particleCount: 7,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
 </body>
 </html>

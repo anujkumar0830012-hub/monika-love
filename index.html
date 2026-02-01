@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Monika ❤️</title>
-
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -12,27 +11,6 @@ margin:0;
 overflow:hidden;
 font-family:'Comic Sans MS',cursive;
 background:linear-gradient(120deg,#ffe6f2,#fff0f5,#e6f7ff);
-}
-
-.heart-bg{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-1;
-overflow:hidden;
-}
-
-.heart{
-position:absolute;
-color:#ff66aa;
-font-size:20px;
-animation:floatUp 8s linear infinite;
-opacity:.5;
-}
-
-@keyframes floatUp{
-from{transform:translateY(100vh) scale(0.5);}
-to{transform:translateY(-10vh) scale(1.2);}
 }
 
 .page{
@@ -66,13 +44,13 @@ to{text-shadow:0 0 30px #ff3399;}
 }
 
 button{
-padding:14px 28px;
-font-size:22px;
 border:none;
 border-radius:40px;
 margin:10px;
 cursor:pointer;
-transition:0.3s;
+transition:0.4s;
+padding:14px 28px;
+font-weight:bold;
 }
 
 .yes{background:#ff4da6;color:white;}
@@ -86,9 +64,7 @@ bottom:-50px;
 font-size:32px;
 animation:up 4s linear forwards;
 }
-@keyframes up{
-to{transform:translateY(-120vh);opacity:0;}
-}
+@keyframes up{to{transform:translateY(-120vh);opacity:0;}}
 
 .flower{
 position:fixed;
@@ -96,19 +72,11 @@ top:-40px;
 font-size:28px;
 animation:fall 4s linear forwards;
 }
-@keyframes fall{
-to{transform:translateY(120vh) rotate(360deg);opacity:0;}
-}
+@keyframes fall{to{transform:translateY(120vh) rotate(360deg);opacity:0;}}
 </style>
 </head>
 
 <body>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3a9b7e.mp3">
-</audio>
-
-<div class="heart-bg" id="bg"></div>
 
 <div class="page" id="p1" style="display:flex">
 <h1>Welcome Monika Ji ❤️</h1>
@@ -120,49 +88,39 @@ to{transform:translateY(120vh) rotate(360deg);opacity:0;}
 <button onclick="go3()">Next</button>
 </div>
 
+<!-- STEP 1 -->
 <div class="page" id="p3">
 <h1>Will you be my life partner?</h1>
-<button class="yes" onclick="celebrate()">💖 YES</button>
-<button class="no" onclick="go4()">💔 NO</button>
+<button class="yes" style="font-size:26px" onclick="celebrate()">💖 YES</button>
+<button class="no" style="font-size:22px" onclick="go4()">💔 NO</button>
 </div>
 
+<!-- STEP 2 -->
 <div class="page" id="p4">
-<h1>Monika itni jaldii kya h… araam se soch le</h1>
-<button class="yes" style="font-size:28px" onclick="celebrate()">💖 YES</button>
-<button class="no" onclick="go5()">💔 NO</button>
+<h1>Monika itni jaldii kya h…</h1>
+<button class="yes" style="font-size:34px" onclick="celebrate()">💖 YES</button>
+<button class="no" style="font-size:18px" onclick="go5()">💔 NO</button>
 </div>
 
+<!-- STEP 3 -->
 <div class="page" id="p5">
 <h1>Please Monika thoda soch le…</h1>
-<button class="yes" style="font-size:34px" onclick="celebrate()">💖 YES</button>
-<button class="no" onclick="go6()">💔 NO</button>
+<button class="yes" style="font-size:44px" onclick="celebrate()">💖 YES</button>
+<button class="no" style="font-size:12px" onclick="go6()">💔 NO</button>
 </div>
 
+<!-- STEP 4 -->
 <div class="page" id="p6">
 <h1>As u wish Monika ji…</h1>
-<button class="yes" onclick="celebrate()">💖 YES</button>
-<button class="no">💔 NO</button>
+<button class="yes" style="font-size:40px" onclick="celebrate()">💖 YES</button>
+<button class="no" style="font-size:8px">💔 NO</button>
 </div>
 
 <div class="page" id="final">
-<h1>Ab yaha tak aa gaye ho…<br>to Anuj ko call bhi kar lo madam ji ❤️</h1>
+<h1>Ab yaha tak aa gaye ho…<br>to Anuj ko call bhi kar lo ❤️</h1>
 </div>
 
 <script>
-
-document.getElementById("music").play().catch(()=>{});
-
-function hearts(){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💗";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(6+Math.random()*4)+"s";
-document.getElementById("bg").appendChild(h);
-setTimeout(()=>h.remove(),10000);
-}
-setInterval(hearts,400);
-
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.style.display="none");
 document.getElementById(id).style.display="flex";
@@ -197,19 +155,13 @@ setTimeout(()=>f.remove(),4000);
 }
 
 function fireworks(){
-confetti({
-particleCount:250,
-spread:150,
-origin:{y:0.6}
-});
+confetti({particleCount:250,spread:150,origin:{y:0.6}});
 }
 
 function celebrate(){
 balloons();
 flowers();
-fireworks();
 let interval=setInterval(fireworks,600);
-
 setTimeout(()=>{
 clearInterval(interval);
 show("final");

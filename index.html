@@ -2,204 +2,174 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Monika</title>
+<title>For Monika ❤️</title>
 
 <style>
 body{
 margin:0;
-height:100vh;
-overflow:hidden;
-background:linear-gradient(135deg,#ffe6f0,#fff5fa,#ffeaf2);
-font-family:sans-serif;
+font-family: "Comic Sans MS", cursive;
+overflow-x:hidden;
+background: linear-gradient(45deg,#ffd6e8,#ffeaf4,#e6f7ff);
+background-size: 400% 400%;
+animation: bg 12s infinite alternate;
+}
+
+@keyframes bg{
+0%{background-position:left}
+100%{background-position:right}
+}
+
+.page{
+min-height:100vh;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-perspective:1200px;
-}
-
-/* card */
-.card{
-width:90%;
-max-width:600px;
-background:rgba(255,255,255,0.4);
-backdrop-filter:blur(15px);
-border-radius:25px;
-padding:40px;
 text-align:center;
-box-shadow:0 10px 40px rgba(0,0,0,0.25);
-animation:flip 0.8s ease;
-position:relative;
+padding:40px;
+transition:1s;
 }
 
-/* flip */
-@keyframes flip{
-from{transform:rotateY(90deg);opacity:0;}
-to{transform:rotateY(0);opacity:1;}
-}
-
-/* dancing text */
-h1,h2{
-color:#ff4d88;
-animation:dance 1.5s infinite alternate;
+h1{
+font-size:40px;
+color:#ff2f92;
+animation: dance 1.5s infinite alternate;
 }
 
 @keyframes dance{
-from{transform:translateY(0);}
-to{transform:translateY(-6px);}
+from{transform:translateY(-5px)}
+to{transform:translateY(5px)}
 }
 
-.link{
-cursor:pointer;
-font-size:20px;
-margin-top:20px;
-font-weight:bold;
-color:#ff4d88;
-}
-
-/* buttons */
 button{
-padding:14px 26px;
+padding:15px 25px;
+font-size:22px;
 border:none;
-border-radius:12px;
-font-size:20px;
-margin:10px;
+border-radius:40px;
 cursor:pointer;
-transition:0.3s;
+margin:10px;
+transition:.3s;
 }
 
-.yes{background:#ff77aa;color:white;}
-.no{background:#888;color:white;}
+.yes{background:#ff4da6;color:white;}
+.no{background:#999;color:white;}
 
-/* 3D popup */
-.popup{
+button:hover{transform:scale(1.1);}
+
+#popup{
 position:fixed;
-top:35%;
+top:50%;
 left:50%;
-transform:translateX(-50%) scale(0);
-font-size:60px;
+transform:translate(-50%,-50%);
+background:white;
 padding:20px 30px;
 border-radius:20px;
-background:white;
-box-shadow:0 0 25px rgba(255,0,150,0.6);
-animation:pop 0.6s ease forwards;
-z-index:999;
+font-size:28px;
+display:none;
+z-index:1000;
+box-shadow:0 0 20px pink;
 }
 
-@keyframes pop{
-0%{transform:translateX(-50%) scale(0);}
-60%{transform:translateX(-50%) scale(1.3);}
-100%{transform:translateX(-50%) scale(1);}
+.float{
+position:fixed;
+bottom:-50px;
+font-size:30px;
+animation:floatUp 4s linear forwards;
 }
 
-/* floating hearts */
-.heart{
-position:absolute;
-font-size:26px;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-10vh);opacity:0;}
+@keyframes floatUp{
+to{transform:translateY(-120vh);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="app" class="card"></div>
+<div id="popup"></div>
+
+<div class="page">
+<h1>Welcome Monika Ji ❤️</h1>
+<button onclick="next()">Click to know</button>
+</div>
+
+<div class="page" style="display:none" id="p2">
+<h1>Please Monika last think about us…</h1>
+<p style="margin-top:200px">Scroll ↓</p>
+</div>
+
+<div class="page" style="display:none" id="p3">
+<h1>Will you be my life partner?</h1>
+<button class="yes" onclick="yes()">💖 YES</button>
+<button class="no" onclick="no1()">💔 NO</button>
+</div>
+
+<div class="page" style="display:none" id="p4">
+<h1>Monika itni jaldii kya h… araam se soch le</h1>
+<button class="yes" style="font-size:30px" onclick="yes()">💖 YES</button>
+<button class="no" style="font-size:16px" onclick="no2()">💔 NO</button>
+</div>
+
+<div class="page" style="display:none" id="p5">
+<h1>Please Monika thoda soch le…</h1>
+<button class="yes" style="font-size:36px" onclick="yes()">💖 YES</button>
+<button class="no" style="font-size:12px" onclick="no3()">💔 NO</button>
+</div>
+
+<div class="page" style="display:none" id="p6">
+<h1>As u wish Monika ji…</h1>
+<button class="yes" onclick="yes()">💖 YES</button>
+<button class="no">💔 NO</button>
+</div>
 
 <script>
+let step=1;
 
-let step=0;
-let noCount=0;
-
-/* floating love bg */
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💑";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},900);
-
-/* popup */
-function popup(icon){
-let p=document.createElement("div");
-p.className="popup";
-p.innerHTML=icon;
-document.body.appendChild(p);
-setTimeout(()=>p.remove(),900);
-}
-
-/* pages */
 function next(){
-step++;
-
-if(step==1){
-app.innerHTML=`
-<h1>welcome monika jee ❤️</h1>
-<div class="link" onclick="next()">Click to know</div>`;
+document.querySelectorAll(".page")[0].style.display="none";
+document.getElementById("p2").style.display="flex";
+setTimeout(()=>{
+document.getElementById("p3").style.display="flex";
+window.scrollTo(0,document.body.scrollHeight);
+},1500);
 }
 
-if(step==2){
-app.innerHTML=`
-<h2>monika last time think about us.<br>phir kabhi nhi kahunga</h2>
-<div class="link" onclick="next()">Click to know</div>`;
+function showPopup(text){
+let p=document.getElementById("popup");
+p.innerHTML=text;
+p.style.display="block";
+setTimeout(()=>p.style.display="none",1200);
 }
 
-if(step==3){
-app.innerHTML=`
-<h1>Will you be my life partner?</h1>
-<button id="yes" class="yes">YES</button>
-<button id="no" class="no">NO</button>`;
-logic();
+function no1(){
+showPopup("😢 sad");
+document.getElementById("p3").style.display="none";
+document.getElementById("p4").style.display="flex";
 }
 
-if(step==4){
-app.innerHTML=`
-<h2>ab yaha tk aa gye ho to madam jee<br>anuj ko call kr lo ❤️</h2>`;
-}
-}
-
-/* yes/no logic */
-function logic(){
-let yes=document.getElementById("yes");
-let no=document.getElementById("no");
-
-yes.onclick=()=>{
-popup("🥳💖");
-step=3;
-setTimeout(next,900);
-};
-
-no.onclick=()=>{
-popup("😢");
-
-noCount++;
-
-if(noCount==1){
-app.insertAdjacentHTML("beforeend","<p>abhi itni jaldi kya h thoda soch le moni yrr</p>");
-yes.style.transform="scale(1.3)";
-no.style.transform="scale(0.8)";
-}
-else if(noCount==2){
-app.insertAdjacentHTML("beforeend","<p>pls moni think again</p>");
-yes.style.transform="scale(1.7)";
-no.style.transform="scale(0.5)";
-}
-else{
-app.insertAdjacentHTML("beforeend","<p>ab as your choice monika</p>");
-no.onclick=null;
-yes.style.transform="scale(1)";
-no.style.transform="scale(1)";
-}
-};
+function no2(){
+showPopup("😢 sad");
+document.getElementById("p4").style.display="none";
+document.getElementById("p5").style.display="flex";
 }
 
-next();
+function no3(){
+showPopup("😢 sad");
+document.getElementById("p5").style.display="none";
+document.getElementById("p6").style.display="flex";
+}
 
+function yes(){
+showPopup("🥳 HAPPY!");
+
+for(let i=0;i<25;i++){
+let e=document.createElement("div");
+e.className="float";
+e.innerHTML=Math.random()>0.5?"💖":"🎈";
+e.style.left=Math.random()*100+"vw";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),4000);
+}
+}
 </script>
 
 </body>

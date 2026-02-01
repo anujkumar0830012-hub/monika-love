@@ -6,175 +6,155 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  background: linear-gradient(120deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);
-  background-size:400% 400%;
-  animation:bgMove 15s ease infinite;
-}
-
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
+body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden; background:#f2c1d1;}
 .container{
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  border-radius:30px;
-  padding:40px;
+  width:90%;
+  max-width:600px;
   text-align:center;
-  max-width:550px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius:25px;
+  padding:40px;
   box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  color:white;
+  position:relative;
 }
-
-.subtext{
-  font-size:20px;
-  color:#ffe6f2;
-  margin-bottom:15px;
-  text-shadow: 0 0 10px #ff6ec4;
-}
-
-.maintext{
-  font-size:28px;
-  font-weight:700;
-  color:#ffffff;
-  margin-bottom:30px;
-  text-shadow: 0 0 20px #ff6ec4, 0 0 30px #ff6ec4, 0 0 40px #ff6ec4;
-}
-
 button{
   padding:15px 35px;
   font-size:20px;
+  margin:10px;
   border:none;
   border-radius:12px;
   cursor:pointer;
-  margin:10px;
   font-weight:bold;
   transition:0.3s;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
-
-#yesBtn{
-  background: #ff4d6d;
-  color:white;
-  font-size:22px;
-}
-
-#yesBtn:hover{
-  transform: scale(1.1);
-  box-shadow:0 0 20px #ff4d6d, 0 0 40px #ff6ec4;
-}
-
-#noBtn{
-  background: gray;
-  color:white;
-}
-
-#message{
-  margin-top:25px;
-  font-size:24px;
-  color:#00ff88;
-  font-weight:bold;
-  text-shadow:0 0 15px #00ff88;
-}
+#yesBtn{background:#ff4d6d;color:white;}
+#yesBtn:hover{transform:scale(1.1);box-shadow:0 0 20px #ff4d6d,0 0 40px #ff6ec4;}
+#noBtn{background:gray;color:white;}
+#message{margin-top:20px;font-size:24px;font-weight:bold;color:#00ff88;text-shadow:0 0 15px #00ff88;}
+/* Background animation */
+body.stage1{background:linear-gradient(45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);background-size:400% 400%;animation:bg1 12s ease infinite;}
+body.stage2{background:linear-gradient(120deg,#43e97b,#38f9d7,#ff9a9e,#fad0c4);background-size:400% 400%;animation:bg2 12s ease infinite;}
+body.stage3{background:#ff4d6d;}
+body.stage4{background:linear-gradient(120deg,#ffb347,#ffcc33,#ff5f6d,#ffc371);background-size:400% 400%;animation:bg3 12s ease infinite;}
+@keyframes bg1{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes bg2{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes bg3{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
 /* Floating hearts */
-.heart{
-  position:absolute;
-  font-size:24px;
-  animation:float 6s linear infinite;
-}
+.heart{position:absolute;font-size:24px;animation:float 6s linear infinite;}
+@keyframes float{0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
 
-@keyframes float{
-  0%{transform:translateY(100vh); opacity:1;}
-  100%{transform:translateY(-10vh); opacity:0;}
-}
+/* Fireworks */
+.firework{position:absolute;width:8px;height:8px;background:gold;border-radius:50%;animation:boom 1s ease-out forwards;}
+@keyframes boom{0%{transform:scale(1);opacity:1;}100%{transform:scale(20);opacity:0;}}
 
-/* Fireworks particles */
-.firework{
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:gold;
-  border-radius:50%;
-  animation:boom 1s ease-out forwards;
-}
-
-@keyframes boom{
-  0%{transform:scale(1); opacity:1;}
-  100%{transform:scale(20); opacity:0;}
-}
-
-/* Clapping emoji animation */
-.clap{
-  position:absolute;
-  font-size:30px;
-  animation:clapMove 3s linear forwards;
-}
-
-@keyframes clapMove{
-  0%{transform:translateY(0) rotate(0deg); opacity:1;}
-  100%{transform:translateY(-400px) rotate(360deg); opacity:0;}
-}
+/* Claps */
+.clap{position:absolute;font-size:30px;animation:clapMove 3s linear forwards;}
+@keyframes clapMove{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(-400px) rotate(360deg);opacity:0;}}
 </style>
 </head>
-<body>
-
-<div class="container">
-  <div class="subtext">Monika, this is the last time I am asking you</div>
-  <div class="maintext">Will you be my Life Partner? 💖</div>
-  <button id="yesBtn" onclick="happyMoments()">YES</button>
-  <button id="noBtn">NO</button>
-  <div id="message"></div>
+<body class="stage1">
+<div class="container" id="content">
+  <div id="text1" style="font-size:24px;font-weight:bold;cursor:pointer;">Click to know</div>
 </div>
 
 <script>
-/* Floating hearts continuously */
-setInterval(()=>{
-  let h = document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},400);
+// Stage tracking
+let stage = 1;
 
-/* YES button function */
-function happyMoments(){
+// Stage 1 text click
+document.getElementById("text1").onclick = function(){
+  stage = 2;
+  document.body.className="stage2";
+  document.getElementById("content").innerHTML = `
+    <div style="font-size:20px;margin-bottom:15px;">Monika pls last time think about it.<br>Phir nhi kahunga kabhi</div>
+    <div style="cursor:pointer;font-size:22px;font-weight:bold;margin-top:20px;" id="next1">Click to know</div>`;
+  document.getElementById("next1").onclick = stage2;
+}
+
+// Stage 2 → Will you be my life partner
+function stage2(){
+  stage = 3;
+  document.body.className="stage3";
+  document.getElementById("content").innerHTML = `
+    <div style="font-size:24px;font-weight:bold;margin-bottom:30px;">Will you be my Life Partner! 💖</div>
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+    <div id="message"></div>`;
+  document.getElementById("yesBtn").onclick = stage3;
+  document.getElementById("noBtn").onclick = function(){};
+}
+
+// Stage 3 → YES happy moments
+function stage3(){
   document.getElementById("yesBtn").style.background="#00ff88";
   document.getElementById("message").innerText="🎉 Congratulations! 🎉";
+  document.body.className="stage4";
 
   // Fireworks
-  for(let i=0;i<35;i++){
+  for(let i=0;i<40;i++){
     let f=document.createElement("div");
     f.className="firework";
     f.style.left=Math.random()*100+"vw";
     f.style.top=Math.random()*100+"vh";
     document.body.appendChild(f);
-    setTimeout(()=>f.remove(),1000);
+    setTimeout(()=>f.remove(),4000);
   }
 
-  // Clapping emojis
-  for(let i=0;i<20;i++){
+  // Claps
+  for(let i=0;i<25;i++){
     let c=document.createElement("div");
     c.className="clap";
     c.innerHTML="👏";
     c.style.left=Math.random()*100+"vw";
     c.style.top="90vh";
     document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
+    setTimeout(()=>c.remove(),4000);
   }
+
+  // Floating hearts
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },400);
+
+  // Scroll down clickable for next stage
+  setTimeout(()=>{
+    let more = document.createElement("div");
+    more.style.cursor="pointer";
+    more.style.fontSize="22px";
+    more.style.fontWeight="bold";
+    more.style.marginTop="30px";
+    more.innerText="Click to know";
+    more.onclick=stage4;
+    document.getElementById("content").appendChild(more);
+  },1000);
 }
 
-/* NO button does nothing */
-document.getElementById("noBtn").onclick=function(){};
+// Stage 4 → final reward
+function stage4(){
+  document.getElementById("content").innerHTML = `
+    <div style="font-size:22px;font-weight:bold;">Anuj is still waiting for you.<br>So ab call kr lo madam jee ❤️</div>
+    <div style="font-size:28px;font-weight:bold;color:#ff0066;margin-top:30px;">🎉 CONGRATULATIONS! 🎉</div>`;
+  
+  // Page full of love hearts background
+  document.body.className="stage4";
+  for(let i=0;i<50;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top=Math.random()*100+"vh";
+    h.style.fontSize=20+Math.random()*20+"px";
+    document.body.appendChild(h);
+  }
+}
 </script>
-
 </body>
 </html>

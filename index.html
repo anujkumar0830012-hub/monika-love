@@ -6,17 +6,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden; background:#f2c1d1;}
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background: #ffe6f0; /* soft pink pastel base */
+}
 .container{
   width:90%;
   max-width:600px;
   text-align:center;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.2);
   backdrop-filter: blur(15px);
   border-radius:25px;
   padding:40px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.3);
-  color:white;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  color:#333;
   position:relative;
 }
 button{
@@ -29,15 +36,15 @@ button{
   font-weight:bold;
   transition:0.3s;
 }
-#yesBtn{background:#ff4d6d;color:white;}
-#yesBtn:hover{transform:scale(1.1);box-shadow:0 0 20px #ff4d6d,0 0 40px #ff6ec4;}
+#yesBtn{background:#ff9aae;color:white;}
+#yesBtn:hover{transform:scale(1.1);box-shadow:0 0 15px #ff9aae;}
 #noBtn{background:gray;color:white;}
-#message{margin-top:20px;font-size:24px;font-weight:bold;color:#00ff88;text-shadow:0 0 15px #00ff88;}
-/* Background animation */
-body.stage1{background:linear-gradient(45deg,#ff9a9e,#fad0c4,#a18cd1,#fbc2eb);background-size:400% 400%;animation:bg1 12s ease infinite;}
-body.stage2{background:linear-gradient(120deg,#43e97b,#38f9d7,#ff9a9e,#fad0c4);background-size:400% 400%;animation:bg2 12s ease infinite;}
-body.stage3{background:#ff4d6d;}
-body.stage4{background:linear-gradient(120deg,#ffb347,#ffcc33,#ff5f6d,#ffc371);background-size:400% 400%;animation:bg3 12s ease infinite;}
+#message{margin-top:20px;font-size:24px;font-weight:bold;color:#ff4d6d;text-shadow:0 0 10px #ffb3c6;}
+/* Soft animated background painting effect */
+body.stage1{background:linear-gradient(45deg,#ffe6f0,#fff0f5,#ffe0f0,#fff5f5);background-size:400% 400%;animation:bg1 15s ease infinite;}
+body.stage2{background:linear-gradient(120deg,#fff0f5,#ffe6f0,#ffd6e0,#fff5f5);background-size:400% 400%;animation:bg2 15s ease infinite;}
+body.stage3{background:#ffd6e0;}
+body.stage4{background:linear-gradient(120deg,#ffe0f0,#ffccd5,#ffd6e0,#fff0f5);background-size:400% 400%;animation:bg3 15s ease infinite;}
 @keyframes bg1{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes bg2{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes bg3{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -89,7 +96,7 @@ function stage2(){
 
 // Stage 3 → YES happy moments
 function stage3(){
-  document.getElementById("yesBtn").style.background="#00ff88";
+  document.getElementById("yesBtn").style.background="#ff77aa";
   document.getElementById("message").innerText="🎉 Congratulations! 🎉";
   document.body.className="stage4";
 
@@ -141,7 +148,7 @@ function stage3(){
 function stage4(){
   document.getElementById("content").innerHTML = `
     <div style="font-size:22px;font-weight:bold;">Anuj is still waiting for you.<br>So ab call kr lo madam jee ❤️</div>
-    <div style="font-size:28px;font-weight:bold;color:#ff0066;margin-top:30px;">🎉 CONGRATULATIONS! 🎉</div>`;
+    <div style="font-size:28px;font-weight:bold;color:#ff77aa;margin-top:30px;">🎉 CONGRATULATIONS! 🎉</div>`;
   
   // Page full of love hearts background
   document.body.className="stage4";

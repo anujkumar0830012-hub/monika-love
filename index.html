@@ -3,176 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Monika</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>For You Moni</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
+        :root {
+            --bg-color: #fff5f7;
+            --accent-color: #ff4d6d;
+            --text-color: #4a4a4a;
+        }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #fce4ec;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            perspective: 1500px;
         }
 
-        section {
-            height: 100vh;
+        /* Book Effect */
+        .book {
+            width: 350px;
+            height: 450px;
+            position: relative;
+            transition: transform 0.5s;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 20px;
-            transition: transform 0.8s ease-in-out;
-            border-bottom: 2px solid #f8bbd0;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backface-visibility: hidden;
+            transform-origin: left;
+            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            text-align: center;
         }
 
-        h1 { font-family: 'Dancing Script', cursive; color: #d81b60; font-size: 2.5rem; }
-        p { color: #880e4f; font-size: 1.2rem; }
+        .flipped {
+            transform: rotateY(-160deg);
+        }
 
-        .btn-click {
-            background-color: #d81b60;
-            color: white;
-            padding: 12px 25px;
+        h2 { color: var(--accent-color); font-size: 1.5rem; }
+        p { color: var(--text-color); margin-bottom: 20px; }
+
+        button {
+            padding: 10px 20px;
             border: none;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
+            transition: all 0.3s;
         }
 
-        .btn-click:hover { transform: scale(1.1); background-color: #ad1457; }
+        .btn-know { background: var(--accent-color); color: white; }
+        
+        .btn-group { display: flex; gap: 15px; align-items: center; margin-top: 20px; }
+        #yesBtn { background: #2ecc71; color: white; }
+        #noBtn { background: #e74c3c; color: white; }
 
-        /* Hidden initially */
-        .hidden { display: none; }
+        /* Scenery & Decor */
+        .decoration { position: absolute; font-size: 2rem; opacity: 0.3; }
 
-        /* Proposal Buttons */
-        .options { margin-top: 30px; display: flex; gap: 20px; }
-        #yesBtn { background-color: #4caf50; }
-        #noBtn { background-color: #f44336; cursor: not-allowed; }
-
-        /* Celebration State */
-        .celebration-active {
-            background: radial-gradient(circle, #ffeb3b, #e91e63);
-            animation: bgChange 2s infinite alternate;
-        }
-
-        @keyframes bgChange {
-            from { background-color: #fce4ec; }
-            to { background-color: #ff80ab; }
-        }
-
-        .gif-container img {
-            width: 200px;
-            border-radius: 15px;
-            margin: 10px;
-        }
-
-        .congrats-text {
-            font-size: 3rem;
-            color: gold;
-            text-shadow: 2px 2px #000;
+        /* Success Animation Area */
+        #success-layer {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 247, 0.95);
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background: rgba(255, 77, 109, 0.2);
+            border-radius: 50%;
+            animation: rise 4s infinite ease-in;
+        }
+
+        @keyframes rise {
+            to { transform: translateY(-100vh) translateX(50px); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <section id="page1">
-        <h1>Monika, please last time think about it.</h1>
-        <p>Phir nahi kahunga kabhi...</p>
-        <button class="btn-click" onclick="nextPage('page2')">Click to know</button>
-    </section>
+<div class="book" id="book">
+    <div class="page" id="p4" style="z-index: 1;">
+        <h2>Ab yaha tk aa gye ho...</h2>
+        <p>Toh madam jee Anuj ko call kr lo! ❤️</p>
+    </div>
 
-    <section id="page2" class="hidden">
-        <h1>"Every moment spent with you is like a beautiful dream come true."</h1>
-        <p>Scroll down a bit...</p>
-        <div style="height: 100px;"></div>
-        <button class="btn-click" onclick="nextPage('page3')">Click to know</button>
-    </section>
-
-    <section id="page3" class="hidden">
-        <h1 id="proposalText">Will you be my life partner?</h1>
-        <div class="options">
-            <button class="btn-click" id="yesBtn" onclick="celebrate()">YES</button>
-            <button class="btn-click" id="noBtn" onmouseover="moveNo()" onclick="noAction()">NO</button>
+    <div class="page" id="p3" style="z-index: 2;">
+        <h2 id="propTitle">Will you be my life partner!</h2>
+        <div class="btn-group">
+            <button id="yesBtn" onclick="celebrate()">Yes</button>
+            <button id="noBtn" onclick="handleNo()">No</button>
         </div>
+    </div>
 
-        <div id="successArea" class="hidden">
-            <h1 class="congrats-text" id="congrats">CONGRATULATIONS! ❤️</h1>
-            <div class="gif-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/26vUxArWfLCHW/giphy.gif" alt="Dance">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzhueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6bm9ubm9ueGZ6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lH4ADRtAYnGsLe/giphy.gif" alt="Celebrate">
-            </div>
-            <p><strong>Click below for the final message...</strong></p>
-            <button class="btn-click" onclick="nextPage('page4')">Click to know</button>
-        </div>
-    </section>
+    <div class="page" id="p2" style="z-index: 3;">
+        <h2>Monica...</h2>
+        <p>Last time think about us. Phir kabhi nhi kahunga.</p>
+        <button class="btn-know" onclick="flipPage('p2')">Click to know</button>
+    </div>
 
-    <section id="page4" class="hidden">
-        <h1>Anuj is still waiting for you.</h1>
-        <h2 style="color: #d81b60;">So ab call kar lo Madam jee! 📞</h2>
-        <p>❤️ 💍 ❤️</p>
-    </section>
+    <div class="page" id="p1" style="z-index: 4;">
+        <h2>Welcome Stylish and Charming Monica</h2>
+        <p>I have something to tell you...</p>
+        <button class="btn-know" onclick="flipPage('p1')">Click to know</button>
+    </div>
+</div>
 
-    <script>
-        function nextPage(pageId) {
-            // Hide all sections
-            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            // Show target section
-            const target = document.getElementById(pageId);
-            target.classList.remove('hidden');
-            window.scrollTo(0, 0);
+<div id="success-layer">
+    <h1 style="color: #ff4d6d; font-size: 3rem;">HURRAY! 🎉</h1>
+    <p>Joyful Moments... ❤️</p>
+    <button class="btn-know" onclick="showFinal()">Click to know</button>
+</div>
+
+<script>
+    let noCount = 0;
+
+    function flipPage(id) {
+        document.getElementById(id).classList.add('flipped');
+    }
+
+    function handleNo() {
+        noCount++;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const title = document.getElementById('propTitle');
+
+        if (noCount === 1) {
+            title.innerText = "Abhi itni jaldii kya h thoda soch le Moni yrr";
+            yesBtn.style.transform = "scale(1.5)";
+            noBtn.style.transform = "scale(0.8)";
+        } else if (noCount === 2) {
+            title.innerText = "Pls Moni think again!";
+            yesBtn.style.transform = "scale(2)";
+            noBtn.style.transform = "scale(0.5)";
+        } else if (noCount >= 3) {
+            title.innerText = "Ab as your choice.";
+            yesBtn.style.transform = "scale(1)";
+            noBtn.style.transform = "scale(1)";
+            noBtn.style.opacity = "0.5";
+            noBtn.style.cursor = "not-allowed";
+            noBtn.disabled = true;
         }
+    }
 
-        function noAction() {
-            alert("This button is out of service. Please try the green one! 😉");
+    function celebrate() {
+        const layer = document.getElementById('success-layer');
+        layer.style.display = 'flex';
+        
+        // Bubbles creation
+        for(let i=0; i<20; i++) {
+            let b = document.createElement('div');
+            b.className = 'bubble';
+            b.style.left = Math.random() * 100 + 'vw';
+            b.style.width = b.style.height = Math.random() * 30 + 10 + 'px';
+            b.style.animationDelay = Math.random() * 2 + 's';
+            layer.appendChild(b);
         }
+    }
 
-        // Make No button unclickable/elusive (Optional spice)
-        function moveNo() {
-            const btn = document.getElementById('noBtn');
-            btn.style.opacity = "0.5";
-        }
+    function showFinal() {
+        document.getElementById('success-layer').style.display = 'none';
+        flipPage('p3');
+    }
+</script>
 
-        function celebrate() {
-            const page = document.getElementById('page3');
-            page.classList.add('celebration-active');
-            document.getElementById('yesBtn').style.display = 'none';
-            document.getElementById('noBtn').style.display = 'none';
-            document.getElementById('proposalText').innerText = "You made me the happiest person! 😍";
-            document.getElementById('successArea').classList.remove('hidden');
-            document.getElementById('congrats').style.display = 'block';
-
-            // Professional Fireworks Effect
-            var duration = 4 * 1000;
-            var end = Date.now() + duration;
-
-            (function frame() {
-                confetti({
-                    particleCount: 7,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
-                });
-                confetti({
-                    particleCount: 7,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
-        }
-    </script>
 </body>
 </html>

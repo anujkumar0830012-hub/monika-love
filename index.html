@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Monika ❤️</title>
+<title>For Monika</title>
 
 <style>
 body{
 margin:0;
 height:100vh;
 overflow:hidden;
-background:linear-gradient(135deg,#ffe6f0,#fff0f5,#ffeaf2);
+background:linear-gradient(135deg,#ffe6f0,#fff5fa,#ffeaf2);
 font-family:sans-serif;
 display:flex;
 justify-content:center;
@@ -17,25 +17,27 @@ align-items:center;
 perspective:1200px;
 }
 
+/* card */
 .card{
 width:90%;
 max-width:600px;
-background:rgba(255,255,255,0.3);
-backdrop-filter:blur(12px);
+background:rgba(255,255,255,0.4);
+backdrop-filter:blur(15px);
 border-radius:25px;
 padding:40px;
 text-align:center;
-box-shadow:0 10px 40px rgba(0,0,0,0.2);
+box-shadow:0 10px 40px rgba(0,0,0,0.25);
 animation:flip 0.8s ease;
 position:relative;
-overflow:hidden;
 }
 
+/* flip */
 @keyframes flip{
 from{transform:rotateY(90deg);opacity:0;}
-to{transform:rotateY(0deg);opacity:1;}
+to{transform:rotateY(0);opacity:1;}
 }
 
+/* dancing text */
 h1,h2{
 color:#ff4d88;
 animation:dance 1.5s infinite alternate;
@@ -54,6 +56,7 @@ font-weight:bold;
 color:#ff4d88;
 }
 
+/* buttons */
 button{
 padding:14px 26px;
 border:none;
@@ -67,18 +70,28 @@ transition:0.3s;
 .yes{background:#ff77aa;color:white;}
 .no{background:#888;color:white;}
 
+/* 3D popup */
 .popup{
 position:fixed;
-top:30%;
+top:35%;
 left:50%;
-transform:translateX(-50%);
-padding:25px 40px;
-border-radius:15px;
-font-size:30px;
-display:none;
+transform:translateX(-50%) scale(0);
+font-size:60px;
+padding:20px 30px;
+border-radius:20px;
+background:white;
+box-shadow:0 0 25px rgba(255,0,150,0.6);
+animation:pop 0.6s ease forwards;
 z-index:999;
 }
 
+@keyframes pop{
+0%{transform:translateX(-50%) scale(0);}
+60%{transform:translateX(-50%) scale(1.3);}
+100%{transform:translateX(-50%) scale(1);}
+}
+
+/* floating hearts */
 .heart{
 position:absolute;
 font-size:26px;
@@ -89,36 +102,11 @@ animation:float 6s linear infinite;
 0%{transform:translateY(100vh);opacity:1;}
 100%{transform:translateY(-10vh);opacity:0;}
 }
-
-.bubble{
-position:absolute;
-font-size:18px;
-animation:bubble 4s linear infinite;
-}
-
-@keyframes bubble{
-0%{transform:translateY(100vh);opacity:1;}
-100%{transform:translateY(-20vh);opacity:0;}
-}
-
-.fire{
-position:absolute;
-width:8px;height:8px;
-background:gold;
-border-radius:50%;
-animation:boom 1s forwards;
-}
-
-@keyframes boom{
-to{transform:scale(20);opacity:0;}
-}
-
 </style>
 </head>
 
 <body>
 
-<div id="popup" class="popup"></div>
 <div id="app" class="card"></div>
 
 <script>
@@ -126,113 +114,88 @@ to{transform:scale(20);opacity:0;}
 let step=0;
 let noCount=0;
 
-function popup(text,good=true){
-let p=document.getElementById("popup");
-p.innerHTML=text;
-p.style.display="block";
-p.style.background=good?"#d4ffd4":"#ffd6d6";
-setTimeout(()=>p.style.display="none",1500);
-}
-
-function hearts(){
-for(let i=0;i<20;i++){
+/* floating love bg */
+setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="💑";
 h.style.left=Math.random()*100+"vw";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
-}
+},900);
+
+/* popup */
+function popup(icon){
+let p=document.createElement("div");
+p.className="popup";
+p.innerHTML=icon;
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),900);
 }
 
-function bubbles(){
-for(let i=0;i<20;i++){
-let b=document.createElement("div");
-b.className="bubble";
-b.innerHTML="💖";
-b.style.left=Math.random()*100+"vw";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),4000);
-}
-}
-
-function fireworks(){
-for(let i=0;i<40;i++){
-let f=document.createElement("div");
-f.className="fire";
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*100+"vh";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1000);
-}
-}
-
+/* pages */
 function next(){
 step++;
 
 if(step==1){
-app.innerHTML=`<h1>Welcome Monika Jee ❤️</h1>
+app.innerHTML=`
+<h1>welcome monika jee ❤️</h1>
 <div class="link" onclick="next()">Click to know</div>`;
 }
 
 if(step==2){
-app.innerHTML=`<h2>Monika last time think about us.<br>Phir kabhi nahi kahunga.</h2>
+app.innerHTML=`
+<h2>monika last time think about us.<br>phir kabhi nhi kahunga</h2>
 <div class="link" onclick="next()">Click to know</div>`;
 }
 
 if(step==3){
-app.innerHTML=`<h1>Will you be my life partner?</h1>
+app.innerHTML=`
+<h1>Will you be my life partner?</h1>
 <button id="yes" class="yes">YES</button>
 <button id="no" class="no">NO</button>`;
 logic();
 }
 
 if(step==4){
-app.innerHTML=`<h2>Ab yaha tk aa gye ho to madam jee<br>Anuj ko call kr lo ❤️</h2>`;
+app.innerHTML=`
+<h2>ab yaha tk aa gye ho to madam jee<br>anuj ko call kr lo ❤️</h2>`;
 }
 }
 
+/* yes/no logic */
 function logic(){
 let yes=document.getElementById("yes");
 let no=document.getElementById("no");
 
-yes.onclick=accept;
+yes.onclick=()=>{
+popup("🥳💖");
+step=3;
+setTimeout(next,900);
+};
 
-no.onclick=function(){
+no.onclick=()=>{
+popup("😢");
+
 noCount++;
-popup("😢",false);
 
 if(noCount==1){
-app.insertAdjacentHTML("beforeend","<p>abhi itni jaldi kya h moni yrr</p>");
+app.insertAdjacentHTML("beforeend","<p>abhi itni jaldi kya h thoda soch le moni yrr</p>");
 yes.style.transform="scale(1.3)";
 no.style.transform="scale(0.8)";
 }
 else if(noCount==2){
 app.insertAdjacentHTML("beforeend","<p>pls moni think again</p>");
-yes.style.transform="scale(1.6)";
+yes.style.transform="scale(1.7)";
 no.style.transform="scale(0.5)";
 }
 else{
-app.insertAdjacentHTML("beforeend","<p>ab as your choice...</p>");
+app.insertAdjacentHTML("beforeend","<p>ab as your choice monika</p>");
 no.onclick=null;
 yes.style.transform="scale(1)";
 no.style.transform="scale(1)";
 }
 };
-}
-
-function accept(){
-popup("🥳💖🎉",true);
-
-let end=Date.now()+4000;
-let fx=setInterval(()=>{
-fireworks();
-hearts();
-bubbles();
-if(Date.now()>end) clearInterval(fx);
-},400);
-
-setTimeout(()=>{step=3;next();},4200);
 }
 
 next();

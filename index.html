@@ -1,196 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You Moni</title>
-    <style>
-        :root {
-            --bg-color: #fff5f7;
-            --accent-color: #ff4d6d;
-            --text-color: #4a4a4a;
-        }
+<meta charset="UTF-8">
+<title>For Monika ❤️</title>
 
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg-color);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            perspective: 1500px;
-        }
+<style>
+body{
+margin:0;
+height:100vh;
+overflow:hidden;
+background:linear-gradient(135deg,#ffe6f0,#fff0f5,#ffeaf2);
+font-family:sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+perspective:1200px;
+}
 
-        /* Book Effect */
-        .book {
-            width: 350px;
-            height: 450px;
-            position: relative;
-            transition: transform 0.5s;
-        }
+.card{
+width:90%;
+max-width:600px;
+background:rgba(255,255,255,0.3);
+backdrop-filter:blur(12px);
+border-radius:25px;
+padding:40px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,0.2);
+animation:flip 0.8s ease;
+position:relative;
+overflow:hidden;
+}
 
-        .page {
-            width: 100%;
-            height: 100%;
-            background: white;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backface-visibility: hidden;
-            transform-origin: left;
-            transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-            text-align: center;
-        }
+@keyframes flip{
+from{transform:rotateY(90deg);opacity:0;}
+to{transform:rotateY(0deg);opacity:1;}
+}
 
-        .flipped {
-            transform: rotateY(-160deg);
-        }
+h1,h2{
+color:#ff4d88;
+animation:dance 1.5s infinite alternate;
+}
 
-        h2 { color: var(--accent-color); font-size: 1.5rem; }
-        p { color: var(--text-color); margin-bottom: 20px; }
+@keyframes dance{
+from{transform:translateY(0);}
+to{transform:translateY(-6px);}
+}
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
+.link{
+cursor:pointer;
+font-size:20px;
+margin-top:20px;
+font-weight:bold;
+color:#ff4d88;
+}
 
-        .btn-know { background: var(--accent-color); color: white; }
-        
-        .btn-group { display: flex; gap: 15px; align-items: center; margin-top: 20px; }
-        #yesBtn { background: #2ecc71; color: white; }
-        #noBtn { background: #e74c3c; color: white; }
+button{
+padding:14px 26px;
+border:none;
+border-radius:12px;
+font-size:20px;
+margin:10px;
+cursor:pointer;
+transition:0.3s;
+}
 
-        /* Scenery & Decor */
-        .decoration { position: absolute; font-size: 2rem; opacity: 0.3; }
+.yes{background:#ff77aa;color:white;}
+.no{background:#888;color:white;}
 
-        /* Success Animation Area */
-        #success-layer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 245, 247, 0.95);
-            z-index: 100;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+.popup{
+position:fixed;
+top:30%;
+left:50%;
+transform:translateX(-50%);
+padding:25px 40px;
+border-radius:15px;
+font-size:30px;
+display:none;
+z-index:999;
+}
 
-        .bubble {
-            position: absolute;
-            bottom: -50px;
-            background: rgba(255, 77, 109, 0.2);
-            border-radius: 50%;
-            animation: rise 4s infinite ease-in;
-        }
+.heart{
+position:absolute;
+font-size:26px;
+animation:float 6s linear infinite;
+}
 
-        @keyframes rise {
-            to { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
-    </style>
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.bubble{
+position:absolute;
+font-size:18px;
+animation:bubble 4s linear infinite;
+}
+
+@keyframes bubble{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-20vh);opacity:0;}
+}
+
+.fire{
+position:absolute;
+width:8px;height:8px;
+background:gold;
+border-radius:50%;
+animation:boom 1s forwards;
+}
+
+@keyframes boom{
+to{transform:scale(20);opacity:0;}
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="book" id="book">
-    <div class="page" id="p4" style="z-index: 1;">
-        <h2>Ab yaha tk aa gye ho...</h2>
-        <p>Toh madam jee Anuj ko call kr lo! ❤️</p>
-    </div>
-
-    <div class="page" id="p3" style="z-index: 2;">
-        <h2 id="propTitle">Will you be my life partner!</h2>
-        <div class="btn-group">
-            <button id="yesBtn" onclick="celebrate()">Yes</button>
-            <button id="noBtn" onclick="handleNo()">No</button>
-        </div>
-    </div>
-
-    <div class="page" id="p2" style="z-index: 3;">
-        <h2>Monica...</h2>
-        <p>Last time think about us. Phir kabhi nhi kahunga.</p>
-        <button class="btn-know" onclick="flipPage('p2')">Click to know</button>
-    </div>
-
-    <div class="page" id="p1" style="z-index: 4;">
-        <h2>Welcome Stylish and Charming Monica</h2>
-        <p>I have something to tell you...</p>
-        <button class="btn-know" onclick="flipPage('p1')">Click to know</button>
-    </div>
-</div>
-
-<div id="success-layer">
-    <h1 style="color: #ff4d6d; font-size: 3rem;">HURRAY! 🎉</h1>
-    <p>Joyful Moments... ❤️</p>
-    <button class="btn-know" onclick="showFinal()">Click to know</button>
-</div>
+<div id="popup" class="popup"></div>
+<div id="app" class="card"></div>
 
 <script>
-    let noCount = 0;
 
-    function flipPage(id) {
-        document.getElementById(id).classList.add('flipped');
-    }
+let step=0;
+let noCount=0;
 
-    function handleNo() {
-        noCount++;
-        const yesBtn = document.getElementById('yesBtn');
-        const noBtn = document.getElementById('noBtn');
-        const title = document.getElementById('propTitle');
+function popup(text,good=true){
+let p=document.getElementById("popup");
+p.innerHTML=text;
+p.style.display="block";
+p.style.background=good?"#d4ffd4":"#ffd6d6";
+setTimeout(()=>p.style.display="none",1500);
+}
 
-        if (noCount === 1) {
-            title.innerText = "Abhi itni jaldii kya h thoda soch le Moni yrr";
-            yesBtn.style.transform = "scale(1.5)";
-            noBtn.style.transform = "scale(0.8)";
-        } else if (noCount === 2) {
-            title.innerText = "Pls Moni think again!";
-            yesBtn.style.transform = "scale(2)";
-            noBtn.style.transform = "scale(0.5)";
-        } else if (noCount >= 3) {
-            title.innerText = "Ab as your choice.";
-            yesBtn.style.transform = "scale(1)";
-            noBtn.style.transform = "scale(1)";
-            noBtn.style.opacity = "0.5";
-            noBtn.style.cursor = "not-allowed";
-            noBtn.disabled = true;
-        }
-    }
+function hearts(){
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💑";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+}
 
-    function celebrate() {
-        const layer = document.getElementById('success-layer');
-        layer.style.display = 'flex';
-        
-        // Bubbles creation
-        for(let i=0; i<20; i++) {
-            let b = document.createElement('div');
-            b.className = 'bubble';
-            b.style.left = Math.random() * 100 + 'vw';
-            b.style.width = b.style.height = Math.random() * 30 + 10 + 'px';
-            b.style.animationDelay = Math.random() * 2 + 's';
-            layer.appendChild(b);
-        }
-    }
+function bubbles(){
+for(let i=0;i<20;i++){
+let b=document.createElement("div");
+b.className="bubble";
+b.innerHTML="💖";
+b.style.left=Math.random()*100+"vw";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),4000);
+}
+}
 
-    function showFinal() {
-        document.getElementById('success-layer').style.display = 'none';
-        flipPage('p3');
-    }
+function fireworks(){
+for(let i=0;i<40;i++){
+let f=document.createElement("div");
+f.className="fire";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+}
+}
+
+function next(){
+step++;
+
+if(step==1){
+app.innerHTML=`<h1>Welcome Monika Jee ❤️</h1>
+<div class="link" onclick="next()">Click to know</div>`;
+}
+
+if(step==2){
+app.innerHTML=`<h2>Monika last time think about us.<br>Phir kabhi nahi kahunga.</h2>
+<div class="link" onclick="next()">Click to know</div>`;
+}
+
+if(step==3){
+app.innerHTML=`<h1>Will you be my life partner?</h1>
+<button id="yes" class="yes">YES</button>
+<button id="no" class="no">NO</button>`;
+logic();
+}
+
+if(step==4){
+app.innerHTML=`<h2>Ab yaha tk aa gye ho to madam jee<br>Anuj ko call kr lo ❤️</h2>`;
+}
+}
+
+function logic(){
+let yes=document.getElementById("yes");
+let no=document.getElementById("no");
+
+yes.onclick=accept;
+
+no.onclick=function(){
+noCount++;
+popup("😢",false);
+
+if(noCount==1){
+app.insertAdjacentHTML("beforeend","<p>abhi itni jaldi kya h moni yrr</p>");
+yes.style.transform="scale(1.3)";
+no.style.transform="scale(0.8)";
+}
+else if(noCount==2){
+app.insertAdjacentHTML("beforeend","<p>pls moni think again</p>");
+yes.style.transform="scale(1.6)";
+no.style.transform="scale(0.5)";
+}
+else{
+app.insertAdjacentHTML("beforeend","<p>ab as your choice...</p>");
+no.onclick=null;
+yes.style.transform="scale(1)";
+no.style.transform="scale(1)";
+}
+};
+}
+
+function accept(){
+popup("🥳💖🎉",true);
+
+let end=Date.now()+4000;
+let fx=setInterval(()=>{
+fireworks();
+hearts();
+bubbles();
+if(Date.now()>end) clearInterval(fx);
+},400);
+
+setTimeout(()=>{step=3;next();},4200);
+}
+
+next();
+
 </script>
 
 </body>

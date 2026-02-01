@@ -2,43 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For Monika ❤️</title>
+<title>Monika ❤️</title>
 
 <style>
 body{
 margin:0;
-font-family: "Comic Sans MS", cursive;
-overflow-x:hidden;
-background: linear-gradient(45deg,#ffd6e8,#ffeaf4,#e6f7ff);
-background-size: 400% 400%;
-animation: bg 12s infinite alternate;
-}
-
-@keyframes bg{
-0%{background-position:left}
-100%{background-position:right}
+font-family:"Comic Sans MS",cursive;
+background:linear-gradient(45deg,#ffd6e8,#fff0f6,#e6f7ff);
+overflow:hidden;
 }
 
 .page{
-min-height:100vh;
-display:flex;
+position:absolute;
+width:100%;
+height:100%;
+display:none;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:40px;
-transition:1s;
+padding:30px;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:scale(.9)}
+to{opacity:1;transform:scale(1)}
 }
 
 h1{
-font-size:40px;
 color:#ff2f92;
-animation: dance 1.5s infinite alternate;
+font-size:38px;
+animation:dance 1.5s infinite alternate;
 }
 
 @keyframes dance{
-from{transform:translateY(-5px)}
-to{transform:translateY(5px)}
+from{transform:translateY(-6px)}
+to{transform:translateY(6px)}
 }
 
 button{
@@ -46,131 +46,113 @@ padding:15px 25px;
 font-size:22px;
 border:none;
 border-radius:40px;
-cursor:pointer;
 margin:10px;
-transition:.3s;
+cursor:pointer;
 }
 
 .yes{background:#ff4da6;color:white;}
 .no{background:#999;color:white;}
 
-button:hover{transform:scale(1.1);}
-
-#popup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:white;
-padding:20px 30px;
-border-radius:20px;
-font-size:28px;
-display:none;
-z-index:1000;
-box-shadow:0 0 20px pink;
-}
-
 .float{
 position:fixed;
 bottom:-50px;
 font-size:30px;
-animation:floatUp 4s linear forwards;
+animation:up 4s linear forwards;
+}
+@keyframes up{
+to{transform:translateY(-120vh);opacity:0;}
 }
 
-@keyframes floatUp{
-to{transform:translateY(-120vh);opacity:0;}
+.spark{
+position:fixed;
+font-size:24px;
+animation:burst 1.5s ease-out forwards;
+}
+@keyframes burst{
+to{transform:scale(3);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<div id="popup"></div>
-
-<div class="page">
+<div class="page" id="p1" style="display:flex">
 <h1>Welcome Monika Ji ❤️</h1>
-<button onclick="next()">Click to know</button>
+<button onclick="go2()">Click to know</button>
 </div>
 
-<div class="page" style="display:none" id="p2">
-<h1>Please Monika last think about us…</h1>
-<p style="margin-top:200px">Scroll ↓</p>
+<div class="page" id="p2">
+<h1>Please Monika think about us…</h1>
+<button onclick="go3()">Next</button>
 </div>
 
-<div class="page" style="display:none" id="p3">
+<div class="page" id="p3">
 <h1>Will you be my life partner?</h1>
-<button class="yes" onclick="yes()">💖 YES</button>
-<button class="no" onclick="no1()">💔 NO</button>
+<button class="yes" onclick="celebrate()">💖 YES</button>
+<button class="no" onclick="go4()">💔 NO</button>
 </div>
 
-<div class="page" style="display:none" id="p4">
+<div class="page" id="p4">
 <h1>Monika itni jaldii kya h… araam se soch le</h1>
-<button class="yes" style="font-size:30px" onclick="yes()">💖 YES</button>
-<button class="no" style="font-size:16px" onclick="no2()">💔 NO</button>
+<button class="yes" style="font-size:28px" onclick="celebrate()">💖 YES</button>
+<button class="no" onclick="go5()">💔 NO</button>
 </div>
 
-<div class="page" style="display:none" id="p5">
+<div class="page" id="p5">
 <h1>Please Monika thoda soch le…</h1>
-<button class="yes" style="font-size:36px" onclick="yes()">💖 YES</button>
-<button class="no" style="font-size:12px" onclick="no3()">💔 NO</button>
+<button class="yes" style="font-size:34px" onclick="celebrate()">💖 YES</button>
+<button class="no" onclick="go6()">💔 NO</button>
 </div>
 
-<div class="page" style="display:none" id="p6">
+<div class="page" id="p6">
 <h1>As u wish Monika ji…</h1>
-<button class="yes" onclick="yes()">💖 YES</button>
+<button class="yes" onclick="celebrate()">💖 YES</button>
 <button class="no">💔 NO</button>
 </div>
 
+<div class="page" id="final">
+<h1>Ab yaha tak aa gaye ho…<br>to Anuj ko call bhi kar lo madam ji ❤️</h1>
+</div>
+
 <script>
-let step=1;
-
-function next(){
-document.querySelectorAll(".page")[0].style.display="none";
-document.getElementById("p2").style.display="flex";
-setTimeout(()=>{
-document.getElementById("p3").style.display="flex";
-window.scrollTo(0,document.body.scrollHeight);
-},1500);
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="flex";
 }
 
-function showPopup(text){
-let p=document.getElementById("popup");
-p.innerHTML=text;
-p.style.display="block";
-setTimeout(()=>p.style.display="none",1200);
+function go2(){
+show("p2");
+setTimeout(()=>{},3000);
 }
 
-function no1(){
-showPopup("😢 sad");
-document.getElementById("p3").style.display="none";
-document.getElementById("p4").style.display="flex";
-}
+function go3(){show("p3")}
+function go4(){show("p4")}
+function go5(){show("p5")}
+function go6(){show("p6")}
 
-function no2(){
-showPopup("😢 sad");
-document.getElementById("p4").style.display="none";
-document.getElementById("p5").style.display="flex";
-}
-
-function no3(){
-showPopup("😢 sad");
-document.getElementById("p5").style.display="none";
-document.getElementById("p6").style.display="flex";
-}
-
-function yes(){
-showPopup("🥳 HAPPY!");
-
+function celebrate(){
 for(let i=0;i<25;i++){
-let e=document.createElement("div");
-e.className="float";
-e.innerHTML=Math.random()>0.5?"💖":"🎈";
-e.style.left=Math.random()*100+"vw";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),4000);
+let b=document.createElement("div");
+b.className="float";
+b.innerHTML=Math.random()>0.5?"🎈":"💖";
+b.style.left=Math.random()*100+"vw";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),4000);
 }
+
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="spark";
+s.innerHTML=["✨","🌸","💥"][Math.floor(Math.random()*3)];
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),1500);
+}
+
+setTimeout(()=>show("final"),4000);
 }
 </script>
 
 </body>
-</html>
+  </html>

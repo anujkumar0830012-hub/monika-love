@@ -1,213 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Lucky ❤️</title>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<title>For Lucky ❤️</title>
 
 <style>
-body{
-margin:0;
-overflow:hidden;
-font-family:Arial;
-background:linear-gradient(#ffe6f2,#ffd6ec);
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg,#ffd6e8,#ffeaf5,#ffd6e8);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
 }
 
-.page{
-position:absolute;
-width:100%;
-height:100%;
-display:none;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-animation:flip 1s;
+.card {
+  width:90%;
+  max-width:420px;
+  background:#fff0f6;
+  padding:30px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  animation: fadeIn 0.6s ease;
 }
 
-@keyframes flip{
-from{transform:rotateY(90deg);opacity:0}
-to{transform:rotateY(0);opacity:1}
+h1 {
+  color:#ff3b8d;
 }
 
-h1{
-color:#ff3399;
-font-size:30px;
-animation:pulse 2s infinite;
+button {
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  margin:10px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.05)}
-100%{transform:scale(1)}
+.yes {
+  background:#ff3b3b;
+  color:white;
 }
 
-button{
-border:none;
-border-radius:40px;
-padding:14px 26px;
-margin:10px;
-cursor:pointer;
-font-weight:bold;
+.no {
+  background:#3b6bff;
+  color:white;
 }
 
-.yes{background:#ff2f92;color:white;}
-.no{background:#666;color:white;}
-
-.float{
-position:fixed;
-bottom:-50px;
-font-size:28px;
-animation:up 4s linear forwards;
+.popup {
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  padding:10px 20px;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  font-size:18px;
+  display:none;
 }
 
-@keyframes up{
-to{transform:translateY(-120vh);opacity:0;}
+@keyframes fadeIn {
+  from {opacity:0; transform:scale(0.9);}
+  to {opacity:1; transform:scale(1);}
 }
 
-#count{font-size:50px;color:#ff0066;}
+/* celebration */
 
-.heart{
-position:fixed;
-top:-30px;
-font-size:22px;
-animation:fall 5s linear forwards;
+.celebrate {
+  position:fixed;
+  inset:0;
+  background:linear-gradient(#ffd6f0,#ffe6ff);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-size:30px;
+  color:#ff0077;
+  animation: fadeIn 0.5s ease;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh);opacity:0;}
+.balloon {
+  position:absolute;
+  bottom:-50px;
+  font-size:30px;
+  animation: float 4s linear infinite;
 }
 
-.fade{
-animation:fade 3s forwards;
+@keyframes float {
+  from {transform:translateY(0);}
+  to {transform:translateY(-120vh);}
 }
 
-@keyframes fade{
-to{opacity:0;}
-}
-
-.slideshow img{
-width:180px;
-border-radius:20px;
-animation:slide 6s infinite;
-}
-
-@keyframes slide{
-0%{opacity:0}
-20%{opacity:1}
-80%{opacity:1}
-100%{opacity:0}
-}
 </style>
 </head>
 
-<body onclick="tapConfetti()">
+<body>
 
-<audio id="music" loop autoplay>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7f58.mp3">
-</audio>
+<div class="popup" id="popup"></div>
 
-<div class="page" id="p1" style="display:flex">
-<h1 id="typing"></h1>
-<button onclick="show('p2')">Click to know</button>
+<div class="card" id="card">
+  <h1>Welcome Lucky ji ❤️</h1>
+  <button onclick="step2()">Next</button>
 </div>
 
-<div class="page" id="p2">
-<h1>Please lucky soch lo puri jindagi ka sawal h…</h1>
-<button onclick="show('p3')">Next</button>
-</div>
-
-<div class="page" id="p3">
-<h1>Will you be my life partner?</h1>
-<button class="yes" onclick="celebrate()">💖 YES</button>
-<button class="no" onclick="show('p4')">💔 NO</button>
-</div>
-
-<div class="page" id="p4">
-<h1>As u wish Lucky ji…</h1>
-<button class="yes" onclick="celebrate()">💖 YES</button>
-<button class="no">💔 NO</button>
-</div>
-
-<div class="page" id="final">
-<h1>Celebration starting in…</h1>
-<div id="count">4</div>
-</div>
-
-<div class="page" id="end">
-<h1>Ab yaha tak aa gaye ho ❤️<br>Anuj ko call bhi kar lo</h1>
-
-<div class="slideshow">
-<img src="https://i.imgur.com/7k12EPD.png">
-</div>
-
-<button onclick="window.location.href='https://wa.me/'">📞 WhatsApp Call</button>
+<div class="celebrate" id="celebrate">
+  🎉 Lucky said YES 🎉
+  <p>Ab yaha tak aa gaye ho to Anuj ko call kar lo madam ji ❤️</p>
 </div>
 
 <script>
-let text="Welcome Lucky Ji ❤️";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(type,70);
-}
-}
-type();
 
-function show(id){
-document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-document.getElementById(id).style.display="flex";
+let noCount = 0;
+
+function showPopup(text) {
+  let p = document.getElementById("popup");
+  p.innerText = text;
+  p.style.display = "block";
+  setTimeout(()=>p.style.display="none",1500);
 }
 
-function balloons(){
-for(let i=0;i<20;i++){
-let b=document.createElement("div");
-b.className="float";
-b.innerHTML="🎈";
-b.style.left=Math.random()*100+"vw";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),4000);
-}
+function step2() {
+  document.getElementById("card").innerHTML =
+  `<h1>Please Lucky think about us ❤️</h1>
+   <p>3 sec ruk ke next dabao</p>
+   <button onclick="step3()">Next</button>`;
 }
 
-function hearts(){
-for(let i=0;i<15;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-}
+function step3() {
+  document.getElementById("card").innerHTML =
+  `<h1>Will you be my life partner? 💖</h1>
+  <button class="yes" id="yesBtn" onclick="yes()">YES ❤️</button>
+  <button class="no" id="noBtn" onclick="no()">NO 💔</button>`;
 }
 
-function fireworks(){
-confetti({particleCount:200,spread:150});
+function no() {
+  noCount++;
+  showPopup("😢 Sad");
+
+  let yesBtn = document.getElementById("yesBtn");
+  let noBtn = document.getElementById("noBtn");
+
+  if(noCount==1){
+    document.querySelector("h1").innerText="Lucky itni jaldi kya h, soch lo ❤️";
+    yesBtn.style.transform="scale(1.4)";
+    noBtn.style.transform="scale(0.7)";
+  }
+  else if(noCount==2){
+    document.querySelector("h1").innerText="Please Lucky soch lo puri zindagi ka sawal h 💕";
+    yesBtn.style.transform="scale(1.8)";
+    noBtn.style.transform="scale(0.5)";
+  }
+  else if(noCount==3){
+    document.querySelector("h1").innerText="As you wish Lucky ji 😔";
+    yesBtn.style.transform="scale(1)";
+    noBtn.style.display="none";
+  }
 }
 
-function tapConfetti(){
-confetti({particleCount:40,spread:70});
+function yes(){
+  showPopup("😍 Happy");
+  startCelebration();
 }
 
-function celebrate(){
-show("final");
-let n=4;
-let timer=setInterval(()=>{
-n--;
-document.getElementById("count").innerText=n;
-balloons();
-hearts();
-fireworks();
-if(n==0){
-clearInterval(timer);
-document.body.classList.add("fade");
-setTimeout(()=>show("end"),2000);
+function startCelebration(){
+  let c = document.getElementById("celebrate");
+  c.style.display="flex";
+
+  for(let i=0;i<30;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.innerText="❤️🎈";
+    b.style.left=Math.random()*100+"vw";
+    b.style.animationDuration=2+Math.random()*3+"s";
+    document.body.appendChild(b);
+  }
 }
-},1000);
-}
+
 </script>
 
 </body>

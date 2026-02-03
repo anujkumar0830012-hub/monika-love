@@ -9,7 +9,7 @@
 body{
 margin:0;
 overflow:hidden;
-font-family:'Comic Sans MS',cursive;
+font-family:Arial, sans-serif;
 background:linear-gradient(120deg,#ffe6f2,#fff0f5,#e6f7ff);
 }
 
@@ -23,18 +23,17 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:30px;
-animation:flip 1s;
+animation:fade 1s;
 }
 
-@keyframes flip{
-from{transform:rotateY(90deg);opacity:0}
-to{transform:rotateY(0);opacity:1}
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
 }
 
 h1{
-font-size:36px;
+font-size:34px;
 color:#ff3399;
-text-shadow:0 0 20px #ff99cc;
 }
 
 button{
@@ -64,19 +63,48 @@ font-size:28px;
 animation:fall 4s linear forwards;
 }
 @keyframes fall{to{transform:translateY(120vh) rotate(360deg);opacity:0;}}
+
+.heart{
+position:fixed;
+font-size:22px;
+animation:floatHeart 6s linear infinite;
+opacity:.7;
+}
+@keyframes floatHeart{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+.sparkle{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+animation:blink 1s infinite;
+}
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:0}
+100%{opacity:1}
+}
 </style>
 </head>
 
 <body>
 
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2023/03/14/audio_0d14f68b3d.mp3">
+</audio>
+
 <div class="page" id="p1" style="display:flex">
 <h1>Welcome Lucky Ji ❤️</h1>
-<button onclick="show('p2')" style="padding:14px 26px">Click to know</button>
+<button onclick="show('p2')">Click to know</button>
 </div>
 
 <div class="page" id="p2">
 <h1>Please Lucky think about us…</h1>
-<button onclick="show('p3')" style="padding:14px 26px">Next</button>
+<button onclick="show('p3')">Next</button>
 </div>
 
 <div class="page" id="p3">
@@ -139,9 +167,31 @@ function fireworks(){
 confetti({particleCount:250,spread:160,origin:{y:0.6}});
 }
 
+function hearts(){
+for(let i=0;i<10;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+}
+}
+
+function sparkles(){
+for(let i=0;i<60;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
+}
+}
+
 function celebrate(){
 balloons();
 flowers();
+hearts();
+sparkles();
 let interval=setInterval(fireworks,600);
 setTimeout(()=>{
 clearInterval(interval);

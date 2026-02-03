@@ -9,21 +9,8 @@
 body{
 margin:0;
 overflow:hidden;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#ffe6f2,#fff0f5,#e6f7ff);
-cursor:none;
-}
-
-/* floating background hearts */
-.bgHeart{
-position:fixed;
-font-size:40px;
-opacity:.08;
-animation:bgMove 20s linear infinite;
-}
-@keyframes bgMove{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-20vh)}
+font-family:Arial;
+background:linear-gradient(#ffe6f2,#ffd6ec);
 }
 
 .page{
@@ -35,7 +22,7 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:30px;
+padding:20px;
 animation:flip 1s;
 }
 
@@ -45,130 +32,130 @@ to{transform:rotateY(0);opacity:1}
 }
 
 h1{
-font-size:32px;
 color:#ff3399;
-min-height:50px;
+font-size:30px;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
 }
 
 button{
 border:none;
-border-radius:50px;
+border-radius:40px;
+padding:14px 26px;
 margin:10px;
 cursor:pointer;
-transition:.3s;
 font-weight:bold;
 }
 
-.yes{
-background:#ff2f92;
-color:white;
-box-shadow:0 0 20px #ff2f92;
-animation:glow 1s infinite alternate;
-}
-
-@keyframes glow{
-from{box-shadow:0 0 10px #ff2f92}
-to{box-shadow:0 0 35px #ff66cc}
-}
-
+.yes{background:#ff2f92;color:white;}
 .no{background:#666;color:white;}
 
 .float{
 position:fixed;
 bottom:-50px;
-font-size:32px;
+font-size:28px;
 animation:up 4s linear forwards;
 }
-@keyframes up{to{transform:translateY(-120vh);opacity:0;}}
 
-.flower{
-position:fixed;
-top:-40px;
-font-size:28px;
-animation:fall 4s linear forwards;
+@keyframes up{
+to{transform:translateY(-120vh);opacity:0;}
 }
-@keyframes fall{to{transform:translateY(120vh) rotate(360deg);opacity:0;}}
 
-.cursorSpark{
+#count{font-size:50px;color:#ff0066;}
+
+.heart{
 position:fixed;
-font-size:18px;
-pointer-events:none;
-animation:fade 1s forwards;
+top:-30px;
+font-size:22px;
+animation:fall 5s linear forwards;
 }
-@keyframes fade{to{opacity:0;transform:scale(2)}}
+
+@keyframes fall{
+to{transform:translateY(110vh);opacity:0;}
+}
+
+.fade{
+animation:fade 3s forwards;
+}
+
+@keyframes fade{
+to{opacity:0;}
+}
+
+.slideshow img{
+width:180px;
+border-radius:20px;
+animation:slide 6s infinite;
+}
+
+@keyframes slide{
+0%{opacity:0}
+20%{opacity:1}
+80%{opacity:1}
+100%{opacity:0}
+}
 </style>
 </head>
 
-<body>
+<body onclick="tapConfetti()">
 
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/audio/2023/03/14/audio_0d14f68b3d.mp3">
+<audio id="music" loop autoplay>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7f58.mp3">
 </audio>
 
-<!-- floating background hearts -->
-<script>
-for(let i=0;i<15;i++){
-let h=document.createElement("div");
-h.className="bgHeart";
-h.innerHTML="💞";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=15+Math.random()*10+"s";
-document.body.appendChild(h);
-}
-</script>
-
 <div class="page" id="p1" style="display:flex">
-<h1 id="t1"></h1>
+<h1 id="typing"></h1>
 <button onclick="show('p2')">Click to know</button>
 </div>
 
 <div class="page" id="p2">
-<h1 id="t2"></h1>
+<h1>Please lucky soch lo puri jindagi ka sawal h…</h1>
 <button onclick="show('p3')">Next</button>
 </div>
 
 <div class="page" id="p3">
 <h1>Will you be my life partner?</h1>
-<button class="yes" style="font-size:26px;padding:16px 34px" onclick="celebrate()">💖 YES</button>
-<button class="no" style="font-size:22px;padding:12px 20px" onclick="show('p4')">💔 NO</button>
+<button class="yes" onclick="celebrate()">💖 YES</button>
+<button class="no" onclick="show('p4')">💔 NO</button>
 </div>
 
 <div class="page" id="p4">
-<h1>Lucky itni jaldii kya h…</h1>
-<button class="yes" style="font-size:38px;padding:22px 60px" onclick="celebrate()">💖 YES</button>
-<button class="no" style="font-size:14px;padding:6px 12px" onclick="show('p5')">💔 NO</button>
-</div>
-
-<div class="page" id="p5">
-<h1>Please lucky soch lo puri jindagi ka sawal h…</h1>
-<button class="yes" style="font-size:54px;padding:28px 80px" onclick="celebrate()">💖 YES</button>
-<button class="no" style="font-size:8px;padding:2px 6px" onclick="show('p6')">💔 NO</button>
-</div>
-
-<div class="page" id="p6">
 <h1>As u wish Lucky ji…</h1>
-<button class="yes" style="font-size:36px;padding:18px 44px" onclick="celebrate()">💖 YES</button>
-<button class="no" style="font-size:36px;padding:18px 44px">💔 NO</button>
+<button class="yes" onclick="celebrate()">💖 YES</button>
+<button class="no">💔 NO</button>
 </div>
 
 <div class="page" id="final">
-<h1>Ab yaha tak aa gaye ho…<br>to Anuj ko call bhi kar lo ❤️</h1>
+<h1>Celebration starting in…</h1>
+<div id="count">4</div>
+</div>
+
+<div class="page" id="end">
+<h1>Ab yaha tak aa gaye ho ❤️<br>Anuj ko call bhi kar lo</h1>
+
+<div class="slideshow">
+<img src="https://i.imgur.com/7k12EPD.png">
+</div>
+
+<button onclick="window.location.href='https://wa.me/'">📞 WhatsApp Call</button>
 </div>
 
 <script>
-function typeText(id,text){
+let text="Welcome Lucky Ji ❤️";
 let i=0;
-let el=document.getElementById(id);
-el.innerHTML="";
-let interval=setInterval(()=>{
-el.innerHTML+=text[i];
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
 i++;
-if(i>=text.length)clearInterval(interval);
-},40);
+setTimeout(type,70);
 }
-
-typeText("t1","Welcome Lucky Ji ❤️");
-typeText("t2","Please Lucky think about us…");
+}
+type();
 
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.style.display="none");
@@ -176,52 +163,51 @@ document.getElementById(id).style.display="flex";
 }
 
 function balloons(){
-for(let i=0;i<30;i++){
+for(let i=0;i<20;i++){
 let b=document.createElement("div");
 b.className="float";
-b.innerHTML=Math.random()>0.5?"🎈":"💖";
+b.innerHTML="🎈";
 b.style.left=Math.random()*100+"vw";
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),4000);
 }
 }
 
-function flowers(){
-for(let i=0;i<25;i++){
-let f=document.createElement("div");
-f.className="flower";
-f.innerHTML="🌸";
-f.style.left=Math.random()*100+"vw";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),4000);
+function hearts(){
+for(let i=0;i<15;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
 }
 }
 
 function fireworks(){
-confetti({particleCount:250,spread:160,origin:{y:0.6}});
+confetti({particleCount:200,spread:150});
+}
+
+function tapConfetti(){
+confetti({particleCount:40,spread:70});
 }
 
 function celebrate(){
-navigator.vibrate?.(200);
-balloons();
-flowers();
-let interval=setInterval(fireworks,600);
-setTimeout(()=>{
-clearInterval(interval);
 show("final");
-},4000);
+let n=4;
+let timer=setInterval(()=>{
+n--;
+document.getElementById("count").innerText=n;
+balloons();
+hearts();
+fireworks();
+if(n==0){
+clearInterval(timer);
+document.body.classList.add("fade");
+setTimeout(()=>show("end"),2000);
 }
-
-/* cursor sparkles */
-document.addEventListener("mousemove",e=>{
-let s=document.createElement("div");
-s.className="cursorSpark";
-s.innerHTML="✨";
-s.style.left=e.clientX+"px";
-s.style.top=e.clientY+"px";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),1000);
-});
+},1000);
+}
 </script>
 
 </body>

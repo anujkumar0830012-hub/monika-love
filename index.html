@@ -1,99 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>For Lucky ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(120deg,#ffd6e8,#ffeaf5,#ffd6e8);
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+
+body{
+margin:0;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(120deg,#ffd6ea,#ffeaf5,#fff0fa);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.card {
-  width:90%;
-  max-width:420px;
-  background:#fff0f6;
-  padding:30px;
-  border-radius:25px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,0.15);
-  animation: fadeIn 0.6s ease;
+/* floating hearts background */
+
+.heart{
+position:absolute;
+color:#ff4d88;
+font-size:22px;
+animation:float 12s linear infinite;
+opacity:.6;
 }
 
-h1 {
-  color:#ff3b8d;
+@keyframes float{
+from{transform:translateY(110vh) rotate(0deg);}
+to{transform:translateY(-20vh) rotate(360deg);}
 }
 
-button {
-  padding:12px 25px;
-  border:none;
-  border-radius:30px;
-  font-size:18px;
-  margin:10px;
-  cursor:pointer;
-  transition:0.3s;
+.card{
+width:420px;
+background:#fff;
+padding:35px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+animation:fadeIn .6s ease;
+z-index:2;
 }
 
-.yes {
-  background:#ff3b3b;
-  color:white;
+h1{
+font-family:'Pacifico',cursive;
+color:#ff2e7a;
+font-size:32px;
+margin-bottom:15px;
 }
 
-.no {
-  background:#3b6bff;
-  color:white;
+p{
+color:#555;
 }
 
-.popup {
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  padding:10px 20px;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-  font-size:18px;
-  display:none;
+button{
+padding:12px 28px;
+border:none;
+border-radius:30px;
+font-size:18px;
+margin:10px;
+cursor:pointer;
+transition:.3s;
+font-weight:600;
 }
 
-@keyframes fadeIn {
-  from {opacity:0; transform:scale(0.9);}
-  to {opacity:1; transform:scale(1);}
+.yes{
+background:#ff2e63;
+color:white;
 }
 
-/* celebration */
-
-.celebrate {
-  position:fixed;
-  inset:0;
-  background:linear-gradient(#ffd6f0,#ffe6ff);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  font-size:30px;
-  color:#ff0077;
-  animation: fadeIn 0.5s ease;
+.no{
+background:#3f72ff;
+color:white;
 }
 
-.balloon {
-  position:absolute;
-  bottom:-50px;
-  font-size:30px;
-  animation: float 4s linear infinite;
+.popup{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:12px 20px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+display:none;
+font-size:18px;
+z-index:5;
 }
 
-@keyframes float {
-  from {transform:translateY(0);}
-  to {transform:translateY(-120vh);}
+/* celebration scene */
+
+.celebrate{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:radial-gradient(circle,#ffe1f5,#ffc6e6);
+z-index:10;
+animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:scale(.9);}
+to{opacity:1;transform:scale(1);}
+}
+
+.balloon{
+position:absolute;
+bottom:-80px;
+font-size:32px;
+animation:rise 5s linear forwards;
+}
+
+@keyframes rise{
+from{transform:translateY(0);}
+to{transform:translateY(-130vh);}
+}
+
+/* fireworks light particles */
+
+.spark{
+position:absolute;
+width:6px;
+height:6px;
+background:white;
+border-radius:50%;
+animation:spark 1s linear forwards;
+}
+
+@keyframes spark{
+from{opacity:1;transform:scale(1);}
+to{opacity:0;transform:translateY(-100px) scale(0);}
+}
+
+/* cartoon proposal animation */
+
+.proposal{
+font-size:90px;
+animation:bounce 1.5s infinite alternate;
+}
+
+@keyframes bounce{
+from{transform:translateY(0);}
+to{transform:translateY(-15px);}
 }
 
 </style>
@@ -104,81 +158,114 @@ button {
 <div class="popup" id="popup"></div>
 
 <div class="card" id="card">
-  <h1>Welcome Lucky ji ❤️</h1>
-  <button onclick="step2()">Next</button>
+<h1>Welcome Lucky ji ❤️</h1>
+<p>Tap to continue</p>
+<button onclick="step2()">Next</button>
 </div>
 
 <div class="celebrate" id="celebrate">
-  🎉 Lucky said YES 🎉
-  <p>Ab yaha tak aa gaye ho to Anuj ko call kar lo madam ji ❤️</p>
+<div class="proposal">🤵‍♂️💍👰‍♀️</div>
+<h1>Lucky said YES ❤️</h1>
+<p>Ab yaha tak aa gaye ho to Anuj ko call kar lo madam ji 💕</p>
 </div>
 
 <script>
 
-let noCount = 0;
+/* background hearts */
 
-function showPopup(text) {
-  let p = document.getElementById("popup");
-  p.innerText = text;
-  p.style.display = "block";
-  setTimeout(()=>p.style.display="none",1500);
+for(let i=0;i<25;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=8+Math.random()*6+"s";
+document.body.appendChild(h);
 }
 
-function step2() {
-  document.getElementById("card").innerHTML =
-  `<h1>Please Lucky think about us ❤️</h1>
-   <p>3 sec ruk ke next dabao</p>
-   <button onclick="step3()">Next</button>`;
+/* popup */
+
+function popup(text){
+let p=document.getElementById("popup");
+p.innerText=text;
+p.style.display="block";
+setTimeout(()=>p.style.display="none",1500);
 }
 
-function step3() {
-  document.getElementById("card").innerHTML =
-  `<h1>Will you be my life partner? 💖</h1>
-  <button class="yes" id="yesBtn" onclick="yes()">YES ❤️</button>
-  <button class="no" id="noBtn" onclick="no()">NO 💔</button>`;
+/* steps */
+
+let noCount=0;
+
+function step2(){
+document.getElementById("card").innerHTML=
+`<h1>Please Lucky think about us ❤️</h1>`;
+setTimeout(step3,3000);
 }
 
-function no() {
-  noCount++;
-  showPopup("😢 Sad");
-
-  let yesBtn = document.getElementById("yesBtn");
-  let noBtn = document.getElementById("noBtn");
-
-  if(noCount==1){
-    document.querySelector("h1").innerText="Lucky itni jaldi kya h, soch lo ❤️";
-    yesBtn.style.transform="scale(1.4)";
-    noBtn.style.transform="scale(0.7)";
-  }
-  else if(noCount==2){
-    document.querySelector("h1").innerText="Please Lucky soch lo puri zindagi ka sawal h 💕";
-    yesBtn.style.transform="scale(1.8)";
-    noBtn.style.transform="scale(0.5)";
-  }
-  else if(noCount==3){
-    document.querySelector("h1").innerText="As you wish Lucky ji 😔";
-    yesBtn.style.transform="scale(1)";
-    noBtn.style.display="none";
-  }
+function step3(){
+document.getElementById("card").innerHTML=
+`<h1>Will you be my life partner? 💖</h1>
+<button class="yes" id="yesBtn" onclick="yes()">YES ❤️</button>
+<button class="no" id="noBtn" onclick="no()">NO 💔</button>`;
 }
+
+function no(){
+noCount++;
+popup("😢 Sad");
+
+let yes=document.getElementById("yesBtn");
+let no=document.getElementById("noBtn");
+
+if(noCount==1){
+document.querySelector("h1").innerText="Lucky itni jaldi kya h… soch lo 💕";
+yes.style.transform="scale(1.5)";
+no.style.transform="scale(.7)";
+}
+
+else if(noCount==2){
+document.querySelector("h1").innerText="Please Lucky soch lo puri zindagi ka sawal h ❤️";
+yes.style.transform="scale(2)";
+no.style.transform="scale(.4)";
+}
+
+else if(noCount==3){
+document.querySelector("h1").innerText="As you wish Lucky ji 😔";
+yes.style.transform="scale(1)";
+no.style.display="none";
+}
+}
+
+/* celebration */
 
 function yes(){
-  showPopup("😍 Happy");
-  startCelebration();
+popup("😍 Happy");
+startCelebration();
 }
 
 function startCelebration(){
-  let c = document.getElementById("celebrate");
-  c.style.display="flex";
+let c=document.getElementById("celebrate");
+c.style.display="flex";
 
-  for(let i=0;i<30;i++){
-    let b=document.createElement("div");
-    b.className="balloon";
-    b.innerText="❤️🎈";
-    b.style.left=Math.random()*100+"vw";
-    b.style.animationDuration=2+Math.random()*3+"s";
-    document.body.appendChild(b);
-  }
+/* balloons */
+
+for(let i=0;i<40;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.innerText="🎈❤️";
+b.style.left=Math.random()*100+"vw";
+b.style.animationDuration=3+Math.random()*3+"s";
+document.body.appendChild(b);
+}
+
+/* fireworks */
+
+for(let i=0;i<60;i++){
+let s=document.createElement("div");
+s.className="spark";
+s.style.left=50+Math.random()*200-100+"px";
+s.style.top=50+Math.random()*200-100+"px";
+c.appendChild(s);
+}
+
 }
 
 </script>

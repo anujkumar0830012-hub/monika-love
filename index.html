@@ -1,69 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Lucky ❤️</title>
+<title>Lucky ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 
+/* ---------------- GLOBAL ---------------- */
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-margin:0;
-overflow:hidden;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(120deg,#ffd6ea,#ffeaf5,#fff0fa);
 height:100vh;
+overflow:hidden;
+font-family:Poppins,sans-serif;
+background:linear-gradient(130deg,#ffd6ea,#ffe9f6,#fff0fb);
+animation:bgShift 15s infinite alternate;
 display:flex;
 align-items:center;
 justify-content:center;
 }
 
-/* floating hearts background */
+@keyframes bgShift{
+0%{background:#ffd6ea;}
+50%{background:#ffe6f5;}
+100%{background:#fff0fb;}
+}
+
+/* ---------------- FLOATING HEARTS ---------------- */
 
 .heart{
 position:absolute;
-color:#ff4d88;
-font-size:22px;
-animation:float 12s linear infinite;
+font-size:20px;
 opacity:.6;
+animation:float 12s linear infinite;
 }
 
 @keyframes float{
 from{transform:translateY(110vh) rotate(0deg);}
-to{transform:translateY(-20vh) rotate(360deg);}
+to{transform:translateY(-10vh) rotate(360deg);}
 }
 
+/* ---------------- CARD ---------------- */
+
 .card{
-width:420px;
-background:#fff;
-padding:35px;
+width:440px;
+background:white;
+padding:40px;
 border-radius:30px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,.15);
-animation:fadeIn .6s ease;
+box-shadow:0 25px 60px rgba(0,0,0,.2);
+animation:zoomIn .8s ease;
 z-index:2;
 }
 
+@keyframes zoomIn{
+from{transform:scale(.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
 h1{
-font-family:'Pacifico',cursive;
+font-family:Pacifico,cursive;
+font-size:30px;
 color:#ff2e7a;
-font-size:32px;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 p{
 color:#555;
+margin-bottom:15px;
 }
 
+/* ---------------- BUTTONS ---------------- */
+
 button{
-padding:12px 28px;
+padding:12px 30px;
 border:none;
-border-radius:30px;
+border-radius:40px;
 font-size:18px;
-margin:10px;
 cursor:pointer;
-transition:.3s;
+margin:10px;
+transition:.4s;
 font-weight:600;
 }
 
@@ -77,21 +96,23 @@ background:#3f72ff;
 color:white;
 }
 
+/* ---------------- POPUP ---------------- */
+
 .popup{
 position:fixed;
-top:20px;
+top:25px;
 left:50%;
 transform:translateX(-50%);
 background:white;
-padding:12px 20px;
+padding:10px 20px;
 border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 display:none;
+z-index:10;
 font-size:18px;
-z-index:5;
 }
 
-/* celebration scene */
+/* ---------------- CELEBRATION ---------------- */
 
 .celebrate{
 position:fixed;
@@ -101,19 +122,25 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 background:radial-gradient(circle,#ffe1f5,#ffc6e6);
-z-index:10;
-animation:fadeIn 1s ease;
+z-index:20;
 }
 
-@keyframes fadeIn{
-from{opacity:0;transform:scale(.9);}
-to{opacity:1;transform:scale(1);}
+.proposal{
+font-size:100px;
+animation:bounce 1.5s infinite alternate;
 }
+
+@keyframes bounce{
+from{transform:translateY(0);}
+to{transform:translateY(-15px);}
+}
+
+/* balloons */
 
 .balloon{
 position:absolute;
 bottom:-80px;
-font-size:32px;
+font-size:30px;
 animation:rise 5s linear forwards;
 }
 
@@ -122,7 +149,7 @@ from{transform:translateY(0);}
 to{transform:translateY(-130vh);}
 }
 
-/* fireworks light particles */
+/* fireworks */
 
 .spark{
 position:absolute;
@@ -136,18 +163,6 @@ animation:spark 1s linear forwards;
 @keyframes spark{
 from{opacity:1;transform:scale(1);}
 to{opacity:0;transform:translateY(-100px) scale(0);}
-}
-
-/* cartoon proposal animation */
-
-.proposal{
-font-size:90px;
-animation:bounce 1.5s infinite alternate;
-}
-
-@keyframes bounce{
-from{transform:translateY(0);}
-to{transform:translateY(-15px);}
 }
 
 </style>
@@ -171,18 +186,18 @@ to{transform:translateY(-15px);}
 
 <script>
 
-/* background hearts */
+/* ---------------- BACKGROUND HEART ENGINE ---------------- */
 
-for(let i=0;i<25;i++){
+for(let i=0;i<40;i++){
 let h=document.createElement("div");
 h.className="heart";
 h.innerText="❤️";
 h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=8+Math.random()*6+"s";
+h.style.animationDuration=8+Math.random()*8+"s";
 document.body.appendChild(h);
 }
 
-/* popup */
+/* ---------------- POPUP FUNCTION ---------------- */
 
 function popup(text){
 let p=document.getElementById("popup");
@@ -191,7 +206,7 @@ p.style.display="block";
 setTimeout(()=>p.style.display="none",1500);
 }
 
-/* steps */
+/* ---------------- STORY STEPS ---------------- */
 
 let noCount=0;
 
@@ -208,7 +223,10 @@ document.getElementById("card").innerHTML=
 <button class="no" id="noBtn" onclick="no()">NO 💔</button>`;
 }
 
+/* ---------------- NO BUTTON LOGIC ---------------- */
+
 function no(){
+
 noCount++;
 popup("😢 Sad");
 
@@ -217,14 +235,14 @@ let no=document.getElementById("noBtn");
 
 if(noCount==1){
 document.querySelector("h1").innerText="Lucky itni jaldi kya h… soch lo 💕";
-yes.style.transform="scale(1.5)";
-no.style.transform="scale(.7)";
+yes.style.transform="scale(1.6)";
+no.style.transform="scale(.6)";
 }
 
 else if(noCount==2){
 document.querySelector("h1").innerText="Please Lucky soch lo puri zindagi ka sawal h ❤️";
 yes.style.transform="scale(2)";
-no.style.transform="scale(.4)";
+no.style.transform="scale(.3)";
 }
 
 else if(noCount==3){
@@ -234,7 +252,7 @@ no.style.display="none";
 }
 }
 
-/* celebration */
+/* ---------------- YES CELEBRATION ---------------- */
 
 function yes(){
 popup("😍 Happy");
@@ -242,12 +260,13 @@ startCelebration();
 }
 
 function startCelebration(){
+
 let c=document.getElementById("celebrate");
 c.style.display="flex";
 
-/* balloons */
+/* balloon rain */
 
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
 let b=document.createElement("div");
 b.className="balloon";
 b.innerText="🎈❤️";
@@ -258,11 +277,11 @@ document.body.appendChild(b);
 
 /* fireworks */
 
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
 let s=document.createElement("div");
 s.className="spark";
-s.style.left=50+Math.random()*200-100+"px";
-s.style.top=50+Math.random()*200-100+"px";
+s.style.left=200+Math.random()*300+"px";
+s.style.top=200+Math.random()*200+"px";
 c.appendChild(s);
 }
 
